@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://vpnagent.github.io/news/article-65378.htm" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>类和对象的学习心得</title>
+        <meta name="description" content="&nbsp;    &nbsp;    1，  类和对象的定义：    类就是一类对象的统称。对象就是这一类具体化的一个实例。    2，类和类的实例化    用类型创建对象的过程，称为类的实例化  " />
+        <link rel="icon" href="/assets/website/img/v2ray_free/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="VPN代理 订阅链接节点中文网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vpnagent.github.io/news/article-65378.htm" />
+    <meta property="og:site_name" content="VPN代理 订阅链接节点中文网" />
+    <meta property="og:title" content="类和对象的学习心得" />
+    <meta property="og:image" content="https://vpnagent.github.io/uploads/20241107/784e516d7a03dfa3fb06ccc83ef950fd.webp" />
+        <meta property="og:release_date" content="2025-03-01T07:00:04" />
+    <meta property="og:updated_time" content="2025-03-01T07:00:04" />
+        <meta property="og:description" content="&nbsp;    &nbsp;    1，  类和对象的定义：    类就是一类对象的统称。对象就是这一类具体化的一个实例。    2，类和类的实例化    用类型创建对象的过程，称为类的实例化  " />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="类和对象的学习心得">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- All CSS files -->
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/font-awesome.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/slick.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/slick-theme.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/smoothScorllbar.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/app.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SPD2ENWF9H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SPD2ENWF9H');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="tt-smooth-scroll" data-page="detail">
+    <!-- PRELOADER START -->
+    <div id="preloader">
+        <div class="container">
+            <div class="loading">
+                <div class="loading__letter">V</div>
+                <div class="loading__letter">2</div>
+                <div class="loading__letter">R</div>
+                <div class="loading__letter">A</div>
+                <div class="loading__letter">Y&nbsp;</div>
+                <div class="loading__letter">&nbsp;</div>
+                <div class="loading__letter">F</div>
+                <div class="loading__letter">R</div>
+                <div class="loading__letter">E</div>
+                <div class="loading__letter">E</div>
+            </div>
+        </div>
+    </div>
+    <!-- PRELOADER END -->
+    <!-- Main Wrapper Start -->
+    <div id="scroll-container">
+                <!-- HEADER MENU START -->
+        <header class="header">
+            <div class="container-fluid">
+                <nav class="navigation d-flex align-items-center justify-content-between">
+                    <a href="/" class="d-flex align-items-center logo-box">
+                                                <span>VPN代理</span>
+                                            </a>
+                    <div class="menu-button-right">
+                        <div class="main-menu__nav">
+                            <ul class="main-menu__list">
+                                                                <li>
+                                    <a href="/">首页</a>
+                                </li>
+                                                                <li>
+                                    <a href="/free-nodes/">免费节点</a>
+                                </li>
+                                                                <li>
+                                    <a href="/paid-subscribe/">推荐机场</a>
+                                </li>
+                                                                <li>
+                                    <a href="/news/">新闻资讯</a>
+                                </li>
+                                                                <li>
+                                    <a href="/client.htm">客户端</a>
+                                </li>
+                                                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- HEADER MENU END -->
+        <!-- TITLE BANNER START -->
+        <section class="title-banner">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-md-11">
+                        <div class="title-wrapper">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6 col-sm-6">
+                                    <div class="title-content">
+                                        <h1 class="white fw-700">类和对象的学习心得</h1>
+                                        <small>
+                                            <a href="/">首页</a> / <a href="/news/">新闻资讯</a> / 正文
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-6 d-sm-block d-none">
+                                    <div class="title-image">
+                                        <img src="static/picture/title-banner.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- TITLE BANNER END -->
+                <!-- WHY CHOOSE US -->
+        <section class="why-choose-us py-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                  				  				  				<div id="content_views" class="htmledit_views"> <div>  &nbsp; </div> <div>  &nbsp; </div> <div>  1，<br />  <strong>类和对象的定义：</strong> </div> <div>  <span style="color:#333333;">类就是一类对象的统称。对象就是这一类具体化的一个实例。</span> </div> <div>  <span style="color:#333333;">2，<strong>类和类的实例化</strong></span> </div> <div>  <span style="color:#333333;">用类型创建对象的过程，称为类的实例化 </span> </div> <div> <div>   <span style="color:#333333;">1. </span><br />   <span style="color:#333333;">类只是</span><br />   <span style="color:#333333;">一个</span><br />   <span style="color:#333333;">模型</span><br />   <span style="color:#333333;">一样的东西，限定了类有哪些成员</span><br />   <span style="color:#333333;">. </span>  </div> <div>   <span style="color:#333333;">2. </span><br />   <span style="color:#333333;">一个类可以实例化出多个对象，实例化出的对象占用实际的物理空间，存储类成员变量。</span>  </div> <div>   <span style="color:#333333;">创建：</span>  </div> <div> <pre><code>class Person{     //成员属性     public String name ;          //访问修饰限定符：public   private   protected  什么都不写     public int age  ;             //name和age是实例成员变量     public static int count;       //静态成员变量，在方法区，不管new多少个，只有一个count     /*public boolean flg;     public char ch;*/     //成员方法     public void eat(){         System.out.println("吃饭");     } }</code></pre> <p>实例化：</p> <pre><code>public static void main(String[]args){         //Person是类型  person是局部变量（属于引用类型）          //person 1在栈上   new Person在堆上          Person person1 = new Person();//对象的实例化          Person person2 = new Person();          Person person3 = new Person();          Person person4 = new Person();          Person person5 = new Person();          System.out.println(person1);          System.out.println(person2);</code></pre> <p>访问：</p> <pre><code>public static void main(String[] args) {         Person person = new Person(); //实例化一个对象         System.out.println(person.age);         System.out.println(person.name);         person.eat();          /*System.out.println(person.flg);         System.out.println(person.ch);         int a;         System.out.println(a);   */     }</code></pre> <p><strong>局部变量</strong>：定义在方法当中，特点是当方法结束后该变量也随之消失，因为他存储在栈上。</p> <p>1.作用域：在当前方法的括号内</p> <p>2.生命周期：当方法结束，方法内的局部变量也随之消失。</p> </p></div> <p><strong>成员属性</strong>：（定义在类内部，方法外部的变量）</p> <p>1，实例成员变量&nbsp; ：age&nbsp; &nbsp;name （在堆上）</p> <p>2，静态成员变量&nbsp; ：count&nbsp; &nbsp;（在方法区）</p> <p>接下来看一下如何调用：</p> <pre><code>class Person {     //成员属性     public String name;          //访问修饰限定符：public   private   protected  什么都不写     public int age;             //name和age是实例成员变量     public static int count;       //静态成员变量，在方法区，不管new多少个，只有一个count      /*public boolean flg;     public char ch;*/     //成员方法     public void eat() {         System.out.println("吃饭");     }      public static void func() {         System.out.println("静态的方法");     }      public void show() {         System.out.println("姓名：" + name + "年龄" + age);     } } public class TestDemo {     public static void main(String[] args) {         Person person1 = new Person();         person1.name = "佐助";         person1.show();         System.out.println(person1);     }      public static void main7(String[] args) {         Person person1 = new Person();         person1.name = "佩奇001";         //person2这个引用指向了person1这个对象         Person person2 = person1;         System.out.println(person2.name);     }       public static void main6(String[] args) {         Person person1 = null;         person1.name = "佩奇";         System.out.println(person1.name);     }</code></pre> <p><strong>Alt+Insert快捷键直接生产show函数</strong></p> <p><strong>static关键字</strong></p> <p>1，修饰成员变量：静态成员变量</p> <p>2，修饰成员方法：静态成员方法</p> <p>3，修饰代码块：</p> <p>注意：静态的方法内部不能有实例数据成员。</p> <p>原因：1.静态的方法不依赖于对象，而实例数据成员需要通过实例化才能产生（new）</p> <p>2.静态的方法和静态的数据-&gt;静态的优先被执行的</p> <pre><code>public String name;          //访问修饰限定符：public   private   protected  什么都不写     public int age;             //name和age是实例成员变量     public static int count;  //静态成员变量，在方法区，不管new多少个，只有一个count     // 加static是静态的     public final int SIZE1 = 10;  //被final修饰的常量，对象，和final没关系，堆     public static final int SIZE2 = 10;  //方法区</code></pre> <p><strong>封装：</strong></p> <p><span style="color:#333333;"><strong>private</strong></span><span style="color:#333333;"><strong>实现封装 </strong></span>：</p> <pre><code>class Person2{     private String name;     private int age;     public void setName(String myName){         name = myName;     }     public void setAge(int myAge){         age = myAge;     }     public int getAge(){         return age;     }     public String getName(){         return name;     } } public class TestDemo2 {     public static void main(String[] args) {         Person2 person2 = new Person2();         person2.setAge(15);         person2.setName("卡卡西");         System.out.println(person2.getAge());         System.out.println(person2.getName());      } }</code></pre> <p>普通方法：public&nbsp; 返回值&nbsp; 方法名&nbsp; （参数列表）{<!-- --></p> <p>方法体</p> <p>}</p> <p><strong>构造方法：</strong></p> <p>前提问题：实例化一个对象分为几步？</p> <p>1.为对象分配内存</p> <p>2.调用合适的构造方法，才会产生一个对象。</p> <pre><code>class Person2{     private String name;     private int age;     //alt+insert     // (get and setter)快速生成     //(Constructor)     //this代表当前对象的引用。      public Person2(){         System.out.println("Person2()");     }     public Person2(String name){         this.name = name;         System.out.println("Person2(String)");         System.out.println(this.name);     }     public Person2(String name,int age){      this.name = name;      this.age = age;         System.out.println("Person2(String,int)");     }      public String getName() {         return name;     }      public void setName(String name) {         this.name = name;     }      public int getAge() {         return age;     }      public void setAge(int age) {         this.age = age;     }        private void func4(){         System.out.println("func()");     }     public void  func2(){         func4();     }    }   public class TestDemo2 {     public static void main(String[] args) {         Person2 person2 = new Person2();         Person2 person3 = new Person2("Java");         Person2 person4 = new Person2("鸣人",18);     }       public static void main1(String[] args) {         Person2 person2 = new Person2();         person2.setAge(15);         person2.setName("卡卡西");         person2.func2();         System.out.println(person2.getAge());         System.out.println(person2.getName());      } }</code></pre> <p>到此为止，下集更精彩</p> </div></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-64761.htm">动物医院名片模板图（动物医院的logo）</a></p>
+                                        <p>下一个：<a href="/news/article-65379.htm">猫咪打疫苗需要多少钱一针（猫咪打疫苗大概要花多少钱）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-59425.htm" title="Vue实现评论功能">Vue实现评论功能</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-15-clash-v2ray-ss-ssr.htm" title="VPN代理 | 2月15日20.7M/S|免费VPN/Clash/Shadowrocket/V2ray/SSR免费节点订阅分享">VPN代理 | 2月15日20.7M/S|免费VPN/Clash/Shadowrocket/V2ray/SSR免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-18-free-v2ray.htm" title="VPN代理 | 2月18日21.4M/S|免费VPN/Shadowrocket/V2ray/SSR/Clash免费节点订阅分享">VPN代理 | 2月18日21.4M/S|免费VPN/Shadowrocket/V2ray/SSR/Clash免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-62934.htm" title="妙三多猫疫苗多少钱一针（妙三多猫疫苗多少毫升）">妙三多猫疫苗多少钱一针（妙三多猫疫苗多少毫升）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-13-free-v2ray.htm" title="VPN代理 | 2月13日22.5M/S|免费VPN/Clash/V2ray/Shadowrocket/SSR免费节点链接地址">VPN代理 | 2月13日22.5M/S|免费VPN/Clash/V2ray/Shadowrocket/SSR免费节点链接地址</a></li>
+                        <li class="py-2"><a href="/news/article-62340.htm" title="济南宠物免费赠送信息 济南宠物免费赠送信息网">济南宠物免费赠送信息 济南宠物免费赠送信息网</a></li>
+                        <li class="py-2"><a href="/news/article-63523.htm" title="随系统字体放大，某个View内容显示不全问题怎么修改？">随系统字体放大，某个View内容显示不全问题怎么修改？</a></li>
+                        <li class="py-2"><a href="/news/article-62339.htm" title="动物医院归哪里管的啊 动物医院归哪里管的啊电话">动物医院归哪里管的啊 动物医院归哪里管的啊电话</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-25-free-v2ray-subscribe.htm" title="VPN代理 | 2月25日20.9M/S|免费VPN/Clash/Shadowrocket/SSR/V2ray免费节点订阅分享">VPN代理 | 2月25日20.9M/S|免费VPN/Clash/Shadowrocket/SSR/V2ray免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-63524.htm" title="动物医院属于什么行业类型（动物医院所属行业）">动物医院属于什么行业类型（动物医院所属行业）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">48</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- WHY CHOOSE US -->
+                <!-- FOOTER START -->
+        <footer class="bg-primary pt-sm-40 pt-80 pb-24">
+            <div class="container-fluid">
+                <div class="hr-line mb-24 bg-light-gray"></div>
+                <p class="bottom-bar light-white text-center">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                    <a href="/">VPN代理 订阅链接节点中文网</a> 版权所有 Powered by WordPress
+                </p>
+            </div>
+        </footer>
+        <!-- FOOTER END -->
+        <!-- Back To Top Start -->
+        <button id="back-to-top" style="display: none;"><i class="fa-solid fa-arrow-turn-up"></i></button>
+        <!-- Mobile Menu Start -->
+        <div class="mobile-nav__wrapper">
+            <div class="mobile-nav__overlay mobile-nav__toggler"></div>
+            <div class="mobile-nav__content">
+                <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
+                <div class="logo-box">
+                    <a href="" aria-label="logo image"><img src="/assets/website/img/v2ray_free/logo.png" alt=""></a>
+                </div>
+                <div class="mobile-nav__container"></div>
+                <ul class="mobile-nav__contact list-unstyled">
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:example@company.com">example@company.com</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-phone-alt"></i>
+                        <a href="tel:+12345678">+123 (4567) -890</a>
+                    </li>
+                </ul>
+                <div class="mobile-nav__social">
+                    <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href=""><i class="fab fa-facebook"></i></a>
+                    <a href=""><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu End -->
+        <!-- Jquery Js -->
+        <script src="/assets/website/js/frontend/v2ray_free/bootstrap.min.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/jquery-3.6.3.min.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/slick.min.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/smooth-scrollbar.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/app.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+    <!-- Main Wrapper End -->
+</body>
+
+</html>
