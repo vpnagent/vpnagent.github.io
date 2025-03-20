@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://vpnagent.github.io/news/article-77172.htm" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>mysql5.7版本的窗口函数实现</title>
+        <meta name="description" content="因为mysql5.7没有窗口函数，但是实际上还需要实现该功能，这边将两个进行比较对比实现。 -- 一、窗口函数处理 select   ROW_NUMBER OVER(PARTITION BY  QYM" />
+        <link rel="icon" href="/assets/website/img/v2ray_free/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="VPN代理 订阅链接节点中文网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vpnagent.github.io/news/article-77172.htm" />
+    <meta property="og:site_name" content="VPN代理 订阅链接节点中文网" />
+    <meta property="og:title" content="mysql5.7版本的窗口函数实现" />
+    <meta property="og:image" content="https://vpnagent.github.io/uploads/20241107/f6b0dd1c9f72829affd71aa65891937e.webp" />
+        <meta property="og:release_date" content="2025-03-19T09:11:15" />
+    <meta property="og:updated_time" content="2025-03-19T09:11:15" />
+        <meta property="og:description" content="因为mysql5.7没有窗口函数，但是实际上还需要实现该功能，这边将两个进行比较对比实现。 -- 一、窗口函数处理 select   ROW_NUMBER OVER(PARTITION BY  QYM" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="mysql5.7版本的窗口函数实现">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- All CSS files -->
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/font-awesome.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/slick.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/slick-theme.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/smoothScorllbar.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/app.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SPD2ENWF9H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SPD2ENWF9H');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="tt-smooth-scroll" data-page="detail">
+    <!-- PRELOADER START -->
+    <div id="preloader">
+        <div class="container">
+            <div class="loading">
+                <div class="loading__letter">V</div>
+                <div class="loading__letter">2</div>
+                <div class="loading__letter">R</div>
+                <div class="loading__letter">A</div>
+                <div class="loading__letter">Y&nbsp;</div>
+                <div class="loading__letter">&nbsp;</div>
+                <div class="loading__letter">F</div>
+                <div class="loading__letter">R</div>
+                <div class="loading__letter">E</div>
+                <div class="loading__letter">E</div>
+            </div>
+        </div>
+    </div>
+    <!-- PRELOADER END -->
+    <!-- Main Wrapper Start -->
+    <div id="scroll-container">
+                <!-- HEADER MENU START -->
+        <header class="header">
+            <div class="container-fluid">
+                <nav class="navigation d-flex align-items-center justify-content-between">
+                    <a href="/" class="d-flex align-items-center logo-box">
+                                                <span>VPN代理</span>
+                                            </a>
+                    <div class="menu-button-right">
+                        <div class="main-menu__nav">
+                            <ul class="main-menu__list">
+                                                                <li>
+                                    <a href="/">首页</a>
+                                </li>
+                                                                <li>
+                                    <a href="/free-nodes/">免费节点</a>
+                                </li>
+                                                                <li>
+                                    <a href="/paid-subscribe/">推荐机场</a>
+                                </li>
+                                                                <li>
+                                    <a href="/news/">新闻资讯</a>
+                                </li>
+                                                                <li>
+                                    <a href="/client.htm">客户端</a>
+                                </li>
+                                                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- HEADER MENU END -->
+        <!-- TITLE BANNER START -->
+        <section class="title-banner">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-md-11">
+                        <div class="title-wrapper">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6 col-sm-6">
+                                    <div class="title-content">
+                                        <h1 class="white fw-700">mysql5.7版本的窗口函数实现</h1>
+                                        <small>
+                                            <a href="/">首页</a> / <a href="/news/">新闻资讯</a> / 正文
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-6 d-sm-block d-none">
+                                    <div class="title-image">
+                                        <img src="static/picture/title-banner.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- TITLE BANNER END -->
+                <!-- WHY CHOOSE US -->
+        <section class="why-choose-us py-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <p>因为mysql5.7没有窗口函数，但是实际上还需要实现该功能，这边将两个进行比较对比实现。</p> <pre><code class="prism language-sql"><span class="token comment">-- 一、窗口函数处理</span> <span class="token keyword">select</span>   ROW_NUMBER <span class="token keyword">OVER</span><span class="token punctuation">(</span><span class="token keyword">PARTITION</span> <span class="token keyword">BY</span>  QYMC<span class="token punctuation">,</span>JCSJ<span class="token punctuation">,</span>PKMC  <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> YZMC<span class="token punctuation">)</span>  <span class="token keyword">as</span> row_cnt <span class="token punctuation">,</span>QYMC<span class="token punctuation">,</span>JCSJ<span class="token punctuation">,</span>PKMC<span class="token punctuation">,</span>JCZ<span class="token punctuation">,</span>WRWPFL <span class="token keyword">from</span>   t_sjzx_wryzxjc_fs_rsj <span class="token keyword">where</span>   PKMC <span class="token operator">NOT</span> <span class="token operator">LIKE</span> <span class="token string">'%进口%'</span> <span class="token punctuation">;</span>   <span class="token comment">-- 二、若没有窗口函数，利用其它方式实现ROW_NUMBER OVER()</span> <span class="token keyword">select</span>   <span class="token comment">-- 注意这个计数项一定要放在变量设置之前，若出现和初始设置不一致才会出现1，否则就自增</span> <span class="token keyword">if</span><span class="token punctuation">(</span> <span class="token variable">@QYMC</span><span class="token operator">=</span>a<span class="token punctuation">.</span>QYMC  <span class="token operator">and</span> <span class="token variable">@PKMC</span> <span class="token operator">=</span> a<span class="token punctuation">.</span>PKMC <span class="token operator">and</span>  <span class="token variable">@JCSJ</span><span class="token operator">=</span>a<span class="token punctuation">.</span>JCSJ <span class="token punctuation">,</span>  <span class="token variable">@curRank</span> :<span class="token operator">=</span> <span class="token variable">@curRank</span> <span class="token operator">+</span><span class="token number">1</span> <span class="token punctuation">,</span><span class="token variable">@curRank</span> :<span class="token operator">=</span> <span class="token number">1</span>  <span class="token punctuation">)</span>  <span class="token keyword">as</span> row_cnt <span class="token punctuation">,</span><span class="token variable">@QYMC</span> :<span class="token operator">=</span> a<span class="token punctuation">.</span>QYMC <span class="token punctuation">,</span><span class="token variable">@JCSJ</span> :<span class="token operator">=</span> a<span class="token punctuation">.</span>JCSJ <span class="token punctuation">,</span><span class="token variable">@PKMC</span> :<span class="token operator">=</span> a<span class="token punctuation">.</span>PKMC <span class="token punctuation">,</span>a<span class="token punctuation">.</span>JCZ <span class="token punctuation">,</span>a<span class="token punctuation">.</span>WRWPFL <span class="token keyword">from</span>  <span class="token comment">-- 原“PARTITION BY  QYMC,JCSJ,PKMC  ORDER BY YZMC”，需要在这里将所有进行 order by  进行排序</span> <span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token operator">*</span>   <span class="token keyword">from</span>  t_sjzx_wryzxjc_fs_rsj   <span class="token keyword">WHERE</span>  PKMC <span class="token operator">NOT</span> <span class="token operator">LIKE</span> <span class="token string">'%进口%'</span>  <span class="token keyword">ORDER</span> <span class="token keyword">BY</span>  QYMC<span class="token punctuation">,</span>JCSJ<span class="token punctuation">,</span>PKMC<span class="token punctuation">,</span>YZMC <span class="token punctuation">)</span> a<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">select</span>  <span class="token variable">@QYMC</span> :<span class="token operator">=</span> <span class="token boolean">null</span><span class="token punctuation">,</span><span class="token variable">@PKMC</span> :<span class="token operator">=</span> <span class="token boolean">null</span><span class="token punctuation">,</span><span class="token variable">@JCSJ</span> :<span class="token operator">=</span> <span class="token boolean">null</span><span class="token punctuation">,</span><span class="token variable">@curRank</span> :<span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span> t_temp<span class="token punctuation">;</span>  </code></pre> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-76493.htm">宠物医院医生助理工作要求（宠物医院医生助理工作内容）</a></p>
+                                        <p>下一个：<a href="/news/article-77173.htm">uni-app 63egg.js后端用户上线和下线深度剖析</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-77855.htm" title="生产动物疫苗的上市公司有哪些股票（生产动物疫苗的上市公司有哪些股票名称）">生产动物疫苗的上市公司有哪些股票（生产动物疫苗的上市公司有哪些股票名称）</a></li>
+                        <li class="py-2"><a href="/news/article-67259.htm" title="动物疫苗生产厂家排名榜前十名图片 动物疫苗生产厂家排名榜前十名图片大全">动物疫苗生产厂家排名榜前十名图片 动物疫苗生产厂家排名榜前十名图片大全</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-4-free-v2ray.htm" title="VPN代理 | 3月4日22M/S|免费VPN/Clash/SSR/Shadowrocket/V2ray免费节点订阅分享">VPN代理 | 3月4日22M/S|免费VPN/Clash/SSR/Shadowrocket/V2ray免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-19-free-node-subscribe.htm" title="VPN代理 | 2月19日19.3M/S|免费VPN/SSR/V2ray/Clash/Shadowrocket免费节点订阅分享">VPN代理 | 2月19日19.3M/S|免费VPN/SSR/V2ray/Clash/Shadowrocket免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-64759.htm" title="哪种猫粮比较健康又不贵（哪种猫粮比较健康又不贵的）">哪种猫粮比较健康又不贵（哪种猫粮比较健康又不贵的）</a></li>
+                        <li class="py-2"><a href="/news/article-74455.htm" title="动物疫苗叫什么 动物疫苗叫什么药">动物疫苗叫什么 动物疫苗叫什么药</a></li>
+                        <li class="py-2"><a href="/news/article-73117.htm" title="领养宠物还要押金嘛（领养宠物要钱么）">领养宠物还要押金嘛（领养宠物要钱么）</a></li>
+                        <li class="py-2"><a href="/news/article-61140.htm" title="宠物寄养协议合同电子版有效吗怎么写（宠物店寄养协议文字pdf文件）">宠物寄养协议合同电子版有效吗怎么写（宠物店寄养协议文字pdf文件）</a></li>
+                        <li class="py-2"><a href="/news/article-71126.htm" title="kubeadm 搭建 K8s">kubeadm 搭建 K8s</a></li>
+                        <li class="py-2"><a href="/news/article-61141.htm" title="宠物粮销量排名榜前十名图片（宠物粮价格）">宠物粮销量排名榜前十名图片（宠物粮价格）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">60</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">48</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- WHY CHOOSE US -->
+                <!-- FOOTER START -->
+        <footer class="bg-primary pt-sm-40 pt-80 pb-24">
+            <div class="container-fluid">
+                <div class="hr-line mb-24 bg-light-gray"></div>
+                <p class="bottom-bar light-white text-center">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                    <a href="/">VPN代理 订阅链接节点中文网</a> 版权所有 Powered by WordPress
+                </p>
+            </div>
+        </footer>
+        <!-- FOOTER END -->
+        <!-- Back To Top Start -->
+        <button id="back-to-top" style="display: none;"><i class="fa-solid fa-arrow-turn-up"></i></button>
+        <!-- Mobile Menu Start -->
+        <div class="mobile-nav__wrapper">
+            <div class="mobile-nav__overlay mobile-nav__toggler"></div>
+            <div class="mobile-nav__content">
+                <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
+                <div class="logo-box">
+                    <a href="" aria-label="logo image"><img src="/assets/website/img/v2ray_free/logo.png" alt=""></a>
+                </div>
+                <div class="mobile-nav__container"></div>
+                <ul class="mobile-nav__contact list-unstyled">
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:example@company.com">example@company.com</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-phone-alt"></i>
+                        <a href="tel:+12345678">+123 (4567) -890</a>
+                    </li>
+                </ul>
+                <div class="mobile-nav__social">
+                    <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href=""><i class="fab fa-facebook"></i></a>
+                    <a href=""><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu End -->
+        <!-- Jquery Js -->
+        <script src="/assets/website/js/frontend/v2ray_free/bootstrap.min.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/jquery-3.6.3.min.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/slick.min.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/smooth-scrollbar.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/app.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+    <!-- Main Wrapper End -->
+</body>
+
+</html>
