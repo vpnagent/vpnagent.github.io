@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://vpnagent.github.io/news/article-78537.htm" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>PyQt5之MenuBar菜单控件的使用（三）</title>
+        <meta name="description" content="文章目录  MenuBar 详解 一、定义   1.QMenuBar类 2.QMenu类 2.QAction类   二、创建一个菜单栏     在PyQt5中，菜单栏、主菜单和菜单项分别用QMenuB" />
+        <link rel="icon" href="/assets/website/img/v2ray_free/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="VPN代理 订阅链接节点中文网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vpnagent.github.io/news/article-78537.htm" />
+    <meta property="og:site_name" content="VPN代理 订阅链接节点中文网" />
+    <meta property="og:title" content="PyQt5之MenuBar菜单控件的使用（三）" />
+    <meta property="og:image" content="https://vpnagent.github.io/uploads/20241107/1087ff68104024ec6a2f32f0ab5b63d8.webp" />
+        <meta property="og:release_date" content="2025-03-21T10:31:49" />
+    <meta property="og:updated_time" content="2025-03-21T10:31:49" />
+        <meta property="og:description" content="文章目录  MenuBar 详解 一、定义   1.QMenuBar类 2.QMenu类 2.QAction类   二、创建一个菜单栏     在PyQt5中，菜单栏、主菜单和菜单项分别用QMenuB" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="PyQt5之MenuBar菜单控件的使用（三）">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- All CSS files -->
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/font-awesome.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/slick.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/slick-theme.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/smoothScorllbar.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/app.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SPD2ENWF9H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SPD2ENWF9H');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="tt-smooth-scroll" data-page="detail">
+    <!-- PRELOADER START -->
+    <div id="preloader">
+        <div class="container">
+            <div class="loading">
+                <div class="loading__letter">V</div>
+                <div class="loading__letter">2</div>
+                <div class="loading__letter">R</div>
+                <div class="loading__letter">A</div>
+                <div class="loading__letter">Y&nbsp;</div>
+                <div class="loading__letter">&nbsp;</div>
+                <div class="loading__letter">F</div>
+                <div class="loading__letter">R</div>
+                <div class="loading__letter">E</div>
+                <div class="loading__letter">E</div>
+            </div>
+        </div>
+    </div>
+    <!-- PRELOADER END -->
+    <!-- Main Wrapper Start -->
+    <div id="scroll-container">
+                <!-- HEADER MENU START -->
+        <header class="header">
+            <div class="container-fluid">
+                <nav class="navigation d-flex align-items-center justify-content-between">
+                    <a href="/" class="d-flex align-items-center logo-box">
+                                                <span>VPN代理</span>
+                                            </a>
+                    <div class="menu-button-right">
+                        <div class="main-menu__nav">
+                            <ul class="main-menu__list">
+                                                                <li>
+                                    <a href="/">首页</a>
+                                </li>
+                                                                <li>
+                                    <a href="/free-nodes/">免费节点</a>
+                                </li>
+                                                                <li>
+                                    <a href="/paid-subscribe/">推荐机场</a>
+                                </li>
+                                                                <li>
+                                    <a href="/news/">新闻资讯</a>
+                                </li>
+                                                                <li>
+                                    <a href="/client.htm">客户端</a>
+                                </li>
+                                                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- HEADER MENU END -->
+        <!-- TITLE BANNER START -->
+        <section class="title-banner">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-md-11">
+                        <div class="title-wrapper">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6 col-sm-6">
+                                    <div class="title-content">
+                                        <h1 class="white fw-700">PyQt5之MenuBar菜单控件的使用（三）</h1>
+                                        <small>
+                                            <a href="/">首页</a> / <a href="/news/">新闻资讯</a> / 正文
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-6 d-sm-block d-none">
+                                    <div class="title-image">
+                                        <img src="static/picture/title-banner.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- TITLE BANNER END -->
+                <!-- WHY CHOOSE US -->
+        <section class="why-choose-us py-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-light"> <div class="toc"> <h3>文章目录</h3> <ul> <li><a href="#MenuBar__4" rel="nofollow">MenuBar 详解</a></li> <li><a href="#_8" rel="nofollow">一、定义</a></li> <li> <ul> <li><a href="#1QMenuBar_11" rel="nofollow">1.QMenuBar类</a></li> <li><a href="#2QMenu_28" rel="nofollow">2.QMenu类</a></li> <li><a href="#2QAction_36" rel="nofollow">2.QAction类</a></li> </ul> </li> <li><a href="#_45" rel="nofollow">二、创建一个菜单栏</a></li> </ul> </div> <hr/> </h1> <p>在PyQt5中，菜单栏、主菜单和菜单项分别用QMenuBar类、QMenu类和QAction类来表示。</p> <hr/> </h1> <p>菜单栏是GUI应用的常规组成部分，是位于各种菜单中的一组命令操作。<strong>菜单栏（QMenuBar）</strong> 它分为两部分：<strong>主菜单（QMenu）</strong> 和 <strong>菜单项（QAction）</strong>。一个QMenu中可包含任意多个QAction对象，也可包含另外的QMenu，用来表示级联菜单。创建一个菜单，基本上都要用上这3个类。<br /><img decoding="async" src="http://img.555519.xyz/uploads/20230118/a5c68e1159788b4dbb33d7b11fb9d957.jpg" alt="PyQt5之MenuBar菜单控件的使用（三）"></p> <h2> <a id="1QMenuBar_11" rel="nofollow"></a>1.QMenuBar类</h2> <p>QMenuBar类是所有窗口的菜单栏，创建菜单栏的两种方法如下：<br /><code>方法一： QMenuBar类的构造方法</code></p> <pre><code class="prism language-javascript">self<span class="token punctuation">.</span>menuBar <span class="token operator">=</span> PyQt5<span class="token punctuation">.</span>QtWidgets<span class="token punctuation">.</span><span class="token function">QMenuBar</span><span class="token punctuation">(</span>QMainWindow<span class="token punctuation">)</span> </code></pre> <p><code>方法二：QMainWindow对象的menuBar（）方法 </code></p> <pre><code class="prism language-javascript">self<span class="token punctuation">.</span>menuBar <span class="token operator">=</span> QMainWindow<span class="token punctuation">.</span><span class="token function">menuBar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> </code></pre> <p>创建完菜单栏后，就可以使用QMenuBar类的方法对菜单进行设置。</p> <table> <thead> <tr> <th>方法</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td>addAction（）</td> <td>添加菜单项</td> </tr> <tr> <td>addActions（）</td> <td>添加多个菜单项</td> </tr> <tr> <td>addMenu（）</td> <td>添加主菜单</td> </tr> </tbody> </table> <h2> <a id="2QMenu_28" rel="nofollow"></a>2.QMenu类</h2> <p>QMenu类是菜单栏中的菜单，可显示文本和图标，但不执行操作，类似于标签label的作用。</p> <table> <thead> <tr> <th>方法</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td>addAction（）</td> <td>添加菜单项</td> </tr> <tr> <td>addMenu（）</td> <td>添加主菜单</td> </tr> <tr> <td>setTitle（）</td> <td>设置菜单的文本</td> </tr> <tr> <td>title（）</td> <td>获取菜单的文本</td> </tr> </tbody> </table> <h2> <a id="2QAction_36" rel="nofollow"></a>2.QAction类</h2> <p>PyQt5中将用户与界面进行交互的元素抽象为一种“动作”，用QAction类表示。QAction类是一个运行在菜单栏、工具栏和定制键盘快捷键的抽象类，它是一个真正执行操作的部件。该类有一个常用的信号<strong>triggered</strong>，用来在单击菜单项时发射。</p> <table> <thead> <tr> <th>方法</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td>setIcon（）</td> <td>设置菜单项图标</td> </tr> <tr> <td>setShortcut（）</td> <td>设置快捷键</td> </tr> <tr> <td>setEnabled（）</td> <td>设置菜单项是否可用</td> </tr> <tr> <td>title（）</td> <td>获取菜单项的文本</td> </tr> </tbody> </table> </h1> <p>在下面的例子中，我们创建了一个带有菜单的菜单栏。这个菜单包含了一个动作，如果选中，就会终止应用程序。<br /><code>代码如下（示例）：</code></p> <pre><code class="prism language-python"><span class="token comment"># -*- coding: utf-8 -*-</span> <span class="token comment"># @Time    : 2022/7/14 14:14</span>  <span class="token keyword">import</span> sys <span class="token keyword">from</span> PyQt5<span class="token punctuation">.</span>QtWidgets <span class="token keyword">import</span> QMainWindow<span class="token punctuation">,</span> QAction<span class="token punctuation">,</span> QApplication<span class="token punctuation">,</span> qApp <span class="token keyword">from</span> PyQt5<span class="token punctuation">.</span>QtGui <span class="token keyword">import</span> QIcon  <span class="token keyword">class</span> <span class="token class-name">Example</span><span class="token punctuation">(</span>QMainWindow<span class="token punctuation">)</span><span class="token punctuation">:</span>     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>         <span class="token builtin">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>         self<span class="token punctuation">.</span>my_initUI<span class="token punctuation">(</span><span class="token punctuation">)</span>      <span class="token keyword">def</span> <span class="token function">my_initUI</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>         exitAct <span class="token operator">=</span> QAction<span class="token punctuation">(</span>QIcon<span class="token punctuation">(</span><span class="token string">'images/exit.ico'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'退出&amp;(Q)'</span><span class="token punctuation">,</span> self<span class="token punctuation">)</span>     <span class="token comment">#创建QAction类的对象exitAct。QAction是一个用于菜单栏、工具栏或自定义快捷键的抽象动作行为</span>         exitAct<span class="token punctuation">.</span>setShortcut<span class="token punctuation">(</span><span class="token string">'Ctrl+Q'</span><span class="token punctuation">)</span>    			<span class="token comment">#调用对象的方法,为这个动作定义一个快捷键</span>         <span class="token comment"># exitAct.setStatusTip('退出应用')   	#创建一个当我们鼠标浮于菜单项之上就会显示的一个状态提示</span>         exitAct<span class="token punctuation">.</span>triggered<span class="token punctuation">.</span>connect<span class="token punctuation">(</span>qApp<span class="token punctuation">.</span>quit<span class="token punctuation">)</span>      <span class="token comment">#选中特定的动作，触发信号被发射。信号连接到 QApplication组件的 quit()方法，这样就中断了应用</span>         <span class="token comment"># self.statusBar()      					#创建状态栏，用来显示上面的状态提示</span>          menubar <span class="token operator">=</span> self<span class="token punctuation">.</span>menuBar<span class="token punctuation">(</span><span class="token punctuation">)</span>            	<span class="token comment"># menuBar()方法创建了一个菜单栏</span>         fileMenu <span class="token operator">=</span> menubar<span class="token punctuation">.</span>addMenu<span class="token punctuation">(</span><span class="token string">'文件&amp;(F)'</span><span class="token punctuation">)</span>        <span class="token comment">#创建一个文件菜单，设置快捷键F</span>         fileMenu<span class="token punctuation">.</span>addAction<span class="token punctuation">(</span>exitAct<span class="token punctuation">)</span>                 <span class="token comment">#将退出动作添加到file菜单中</span>         self<span class="token punctuation">.</span>setGeometry<span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">,</span><span class="token number">300</span><span class="token punctuation">,</span><span class="token number">400</span><span class="token punctuation">,</span><span class="token number">300</span><span class="token punctuation">)</span>         self<span class="token punctuation">.</span>setWindowTitle<span class="token punctuation">(</span><span class="token string">'菜单栏'</span><span class="token punctuation">)</span>         self<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token keyword">if</span> __name__<span class="token operator">==</span><span class="token string">'__main__'</span><span class="token punctuation">:</span>     app <span class="token operator">=</span> QApplication<span class="token punctuation">(</span>sys<span class="token punctuation">.</span>argv<span class="token punctuation">)</span>     ex <span class="token operator">=</span> Example<span class="token punctuation">(</span><span class="token punctuation">)</span>     sys<span class="token punctuation">.</span>exit<span class="token punctuation">(</span>app<span class="token punctuation">.</span>exec_<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> </code></pre> <p><code>效果图如下：</code><br /><img decoding="async" src="http://img.555519.xyz/uploads/20230118/02dadef4a960c51c5c5cd0573af5988d.jpg" alt="PyQt5之MenuBar菜单控件的使用（三）"></p> <hr/> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-77855.htm">生产动物疫苗的上市公司有哪些股票（生产动物疫苗的上市公司有哪些股票名称）</a></p>
+                                        <p>下一个：<a href="/news/article-78538.htm">is not eligible for getting processed by all BeanPostProcessors 导致找不到路径报404</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-2-13-free-v2ray.htm" title="VPN代理 | 2月13日22.5M/S|免费VPN/Clash/V2ray/Shadowrocket/SSR免费节点链接地址">VPN代理 | 2月13日22.5M/S|免费VPN/Clash/V2ray/Shadowrocket/SSR免费节点链接地址</a></li>
+                        <li class="py-2"><a href="/news/article-79224.htm" title="猫三联一共几针,多少钱成年猫（猫三联一共几针,多少钱成年猫能打）">猫三联一共几针,多少钱成年猫（猫三联一共几针,多少钱成年猫能打）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-7-free-v2ray.htm" title="VPN代理 | 3月7日21.5M/S|免费VPN/Shadowrocket/SSR/Clash/V2ray免费节点订阅分享">VPN代理 | 3月7日21.5M/S|免费VPN/Shadowrocket/SSR/Clash/V2ray免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-24-free-high-speed-nodes.htm" title="VPN代理 | 2月24日21.7M/S|免费VPN/Shadowrocket/Clash/SSR/V2ray免费节点订阅分享">VPN代理 | 2月24日21.7M/S|免费VPN/Shadowrocket/Clash/SSR/V2ray免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-76493.htm" title="宠物医院医生助理工作要求（宠物医院医生助理工作内容）">宠物医院医生助理工作要求（宠物医院医生助理工作内容）</a></li>
+                        <li class="py-2"><a href="/news/article-68511.htm" title="关于宠物犬领养平台app的信息">关于宠物犬领养平台app的信息</a></li>
+                        <li class="py-2"><a href="/news/article-59426.htm" title="源码中的设计模式&#8211;装饰器模式_在线工具">源码中的设计模式&#8211;装饰器模式_在线工具</a></li>
+                        <li class="py-2"><a href="/news/article-73117.htm" title="领养宠物还要押金嘛（领养宠物要钱么）">领养宠物还要押金嘛（领养宠物要钱么）</a></li>
+                        <li class="py-2"><a href="/news/article-62340.htm" title="济南宠物免费赠送信息 济南宠物免费赠送信息网">济南宠物免费赠送信息 济南宠物免费赠送信息网</a></li>
+                        <li class="py-2"><a href="/news/article-57146.htm" title="Java-多线程-线程安全-同步代码块">Java-多线程-线程安全-同步代码块</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">66</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">48</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- WHY CHOOSE US -->
+                <!-- FOOTER START -->
+        <footer class="bg-primary pt-sm-40 pt-80 pb-24">
+            <div class="container-fluid">
+                <div class="hr-line mb-24 bg-light-gray"></div>
+                <p class="bottom-bar light-white text-center">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                    <a href="/">VPN代理 订阅链接节点中文网</a> 版权所有 Powered by WordPress
+                </p>
+            </div>
+        </footer>
+        <!-- FOOTER END -->
+        <!-- Back To Top Start -->
+        <button id="back-to-top" style="display: none;"><i class="fa-solid fa-arrow-turn-up"></i></button>
+        <!-- Mobile Menu Start -->
+        <div class="mobile-nav__wrapper">
+            <div class="mobile-nav__overlay mobile-nav__toggler"></div>
+            <div class="mobile-nav__content">
+                <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
+                <div class="logo-box">
+                    <a href="" aria-label="logo image"><img src="/assets/website/img/v2ray_free/logo.png" alt=""></a>
+                </div>
+                <div class="mobile-nav__container"></div>
+                <ul class="mobile-nav__contact list-unstyled">
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:example@company.com">example@company.com</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-phone-alt"></i>
+                        <a href="tel:+12345678">+123 (4567) -890</a>
+                    </li>
+                </ul>
+                <div class="mobile-nav__social">
+                    <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href=""><i class="fab fa-facebook"></i></a>
+                    <a href=""><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu End -->
+        <!-- Jquery Js -->
+        <script src="/assets/website/js/frontend/v2ray_free/bootstrap.min.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/jquery-3.6.3.min.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/slick.min.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/smooth-scrollbar.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/app.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+    <!-- Main Wrapper End -->
+</body>
+
+</html>
