@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://vpnagent.github.io/news/article-86997.htm" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>在拦截器中获取 url 路径里面 @PathVariable 的参数值</title>
+        <meta name="description" content="解决办法 Map pathVariables = (Map) request.getAttribute( HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE" />
+        <link rel="icon" href="/assets/website/img/v2ray_free/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="VPN代理 订阅链接节点中文网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vpnagent.github.io/news/article-86997.htm" />
+    <meta property="og:site_name" content="VPN代理 订阅链接节点中文网" />
+    <meta property="og:title" content="在拦截器中获取 url 路径里面 @PathVariable 的参数值" />
+    <meta property="og:image" content="https://vpnagent.github.io/uploads/20241107/17154b4fbb72af3cafd51294cd51d7f6.webp" />
+        <meta property="og:release_date" content="2025-04-02T07:45:38" />
+    <meta property="og:updated_time" content="2025-04-02T07:45:38" />
+        <meta property="og:description" content="解决办法 Map pathVariables = (Map) request.getAttribute( HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="在拦截器中获取 url 路径里面 @PathVariable 的参数值">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- All CSS files -->
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/font-awesome.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/slick.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/slick-theme.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/smoothScorllbar.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/app.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SPD2ENWF9H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SPD2ENWF9H');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="tt-smooth-scroll" data-page="detail">
+    <!-- PRELOADER START -->
+    <div id="preloader">
+        <div class="container">
+            <div class="loading">
+                <div class="loading__letter">V</div>
+                <div class="loading__letter">2</div>
+                <div class="loading__letter">R</div>
+                <div class="loading__letter">A</div>
+                <div class="loading__letter">Y&nbsp;</div>
+                <div class="loading__letter">&nbsp;</div>
+                <div class="loading__letter">F</div>
+                <div class="loading__letter">R</div>
+                <div class="loading__letter">E</div>
+                <div class="loading__letter">E</div>
+            </div>
+        </div>
+    </div>
+    <!-- PRELOADER END -->
+    <!-- Main Wrapper Start -->
+    <div id="scroll-container">
+                <!-- HEADER MENU START -->
+        <header class="header">
+            <div class="container-fluid">
+                <nav class="navigation d-flex align-items-center justify-content-between">
+                    <a href="/" class="d-flex align-items-center logo-box">
+                                                <span>VPN代理</span>
+                                            </a>
+                    <div class="menu-button-right">
+                        <div class="main-menu__nav">
+                            <ul class="main-menu__list">
+                                                                <li>
+                                    <a href="/">首页</a>
+                                </li>
+                                                                <li>
+                                    <a href="/free-nodes/">免费节点</a>
+                                </li>
+                                                                <li>
+                                    <a href="/paid-subscribe/">推荐机场</a>
+                                </li>
+                                                                <li>
+                                    <a href="/news/">新闻资讯</a>
+                                </li>
+                                                                <li>
+                                    <a href="/client.htm">客户端</a>
+                                </li>
+                                                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- HEADER MENU END -->
+        <!-- TITLE BANNER START -->
+        <section class="title-banner">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-md-11">
+                        <div class="title-wrapper">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6 col-sm-6">
+                                    <div class="title-content">
+                                        <h1 class="white fw-700">在拦截器中获取 url 路径里面 @PathVariable 的参数值</h1>
+                                        <small>
+                                            <a href="/">首页</a> / <a href="/news/">新闻资讯</a> / 正文
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-6 d-sm-block d-none">
+                                    <div class="title-image">
+                                        <img src="static/picture/title-banner.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- TITLE BANNER END -->
+                <!-- WHY CHOOSE US -->
+        <section class="why-choose-us py-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                  				  				  				<div id="content_views" class="markdown_views prism-github-gist"> <h4> <a id="_1" rel="nofollow"></a>解决办法</h4> <pre><code class="prism language-Java">Map pathVariables = (Map) request.getAttribute( HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);  String classId = (String)pathVariables.get("classId"); </code></pre> <h4> <a id="_9" rel="nofollow"></a>示例接口</h4> <pre><code class="prism language-Java">    // 获取某个班级下面的学生列表     @RequestMapping("/classes/{classId}/students")     public String list(@PathVariable String classId){          return "学生列表";     } </code></pre> <h4> <a id="_21" rel="nofollow"></a>完整示例</h4> <pre><code class="prism language-Java">package com.example.demo;  import javax.servlet.http.HttpServletRequest; import javax.servlet.http.HttpServletResponse;  import org.springframework.web.servlet.HandlerInterceptor; import org.springframework.web.servlet.HandlerMapping; import org.springframework.web.servlet.ModelAndView;  import java.util.Map;  public class SpringMVCInterceptor implements HandlerInterceptor {   	@Override 	public boolean preHandle(HttpServletRequest request, 			HttpServletResponse response, Object handler) throws Exception { 		Map pathVariables = (Map) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE); 		String chatbotId = (String)pathVariables.get("classId"); 		System.out.println("classId: " + classId); 		if ("1234".equals(classId)) 			return true; 		return false; 	} 	 	 	@Override 	public void postHandle(HttpServletRequest request, 			HttpServletResponse response, Object handler, 			ModelAndView modelAndView) throws Exception { 		// TODO Auto-generated method stub 		 	}  	@Override 	public void afterCompletion(HttpServletRequest request, 			HttpServletResponse response, Object handler, Exception ex) 	throws Exception { 		// TODO Auto-generated method stub 		 	} 	 }  </code></pre> <pre><code class="prism language-Java"> package com.example.demo;  import org.springframework.context.annotation.Configuration; import org.springframework.web.servlet.config.annotation.InterceptorRegistry; import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;  @Configuration public class MvcInterceptorConfig extends WebMvcConfigurationSupport{        @Override     protected void addInterceptors(InterceptorRegistry registry) {         registry.addInterceptor(new SpringMVCInterceptor()).addPathPatterns("/chatbot/**");         super.addInterceptors(registry);     } }  </code></pre> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-86280.htm">动物防疫注射栏属于构筑物还是设备（动物防疫注射栏属于构筑物还是设备类别）</a></p>
+                                        <p>下一个：<a href="/news/article-86998.htm">动物打疫苗后的不良反应是什么症状呢（动物打疫苗后的不良反应是什么症状呢图片）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-79225.htm" title="免费领养宠物平台哪个好一点（免费领养宠物套路）">免费领养宠物平台哪个好一点（免费领养宠物套路）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-13-free-subscribe-node.htm" title="VPN代理 | 3月13日23M/S|免费VPN/SSR/Clash/Shadowrocket/V2ray免费节点订阅分享">VPN代理 | 3月13日23M/S|免费VPN/SSR/Clash/Shadowrocket/V2ray免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-81315.htm" title="Spring Security——【认证、授权、注销及权限控制】">Spring Security——【认证、授权、注销及权限控制】</a></li>
+                        <li class="py-2"><a href="/news/article-65987.htm" title="开宠物店会不会赔本金呀（开宠物店对身体有什么危害）">开宠物店会不会赔本金呀（开宠物店对身体有什么危害）</a></li>
+                        <li class="py-2"><a href="/news/article-86280.htm" title="动物防疫注射栏属于构筑物还是设备（动物防疫注射栏属于构筑物还是设备类别）">动物防疫注射栏属于构筑物还是设备（动物防疫注射栏属于构筑物还是设备类别）</a></li>
+                        <li class="py-2"><a href="/news/article-83423.htm" title="销售兽用疫苗需要什么资质（兽用疫苗销售许可证）">销售兽用疫苗需要什么资质（兽用疫苗销售许可证）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-7-free-v2ray.htm" title="VPN代理 | 3月7日21.5M/S|免费VPN/Shadowrocket/SSR/Clash/V2ray免费节点订阅分享">VPN代理 | 3月7日21.5M/S|免费VPN/Shadowrocket/SSR/Clash/V2ray免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-74455.htm" title="动物疫苗叫什么 动物疫苗叫什么药">动物疫苗叫什么 动物疫苗叫什么药</a></li>
+                        <li class="py-2"><a href="/news/article-67873.htm" title="去哪领养宠物（一般去哪里领养宠物?）">去哪领养宠物（一般去哪里领养宠物?）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-10-node-share-links.htm" title="VPN代理 | 3月10日18.7M/S|免费VPN/Shadowrocket/Clash/V2ray/SSR免费节点订阅分享">VPN代理 | 3月10日18.7M/S|免费VPN/Shadowrocket/Clash/V2ray/SSR免费节点订阅分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- WHY CHOOSE US -->
+                <!-- FOOTER START -->
+        <footer class="bg-primary pt-sm-40 pt-80 pb-24">
+            <div class="container-fluid">
+                <div class="hr-line mb-24 bg-light-gray"></div>
+                <p class="bottom-bar light-white text-center">
+                    <p>
+                        <a href="/">首页</a> | 
+                        <a href="/free-node/">免费节点</a> | 
+                        <a href="/news/">新闻资讯</a> |
+                        <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                    <a href="/">VPN代理 订阅链接节点中文网</a> 版权所有 Powered by WordPress
+                </p>
+            </div>
+        </footer>
+        <!-- FOOTER END -->
+        <!-- Back To Top Start -->
+        <button id="back-to-top" style="display: none;"><i class="fa-solid fa-arrow-turn-up"></i></button>
+        <!-- Mobile Menu Start -->
+        <div class="mobile-nav__wrapper">
+            <div class="mobile-nav__overlay mobile-nav__toggler"></div>
+            <div class="mobile-nav__content">
+                <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
+                <div class="logo-box">
+                    <a href="" aria-label="logo image"><img src="/assets/website/img/v2ray_free/logo.png" alt=""></a>
+                </div>
+                <div class="mobile-nav__container"></div>
+                <ul class="mobile-nav__contact list-unstyled">
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:example@company.com">example@company.com</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-phone-alt"></i>
+                        <a href="tel:+12345678">+123 (4567) -890</a>
+                    </li>
+                </ul>
+                <div class="mobile-nav__social">
+                    <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href=""><i class="fab fa-facebook"></i></a>
+                    <a href=""><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu End -->
+        <!-- Jquery Js -->
+        <script src="/assets/website/js/frontend/v2ray_free/bootstrap.min.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/jquery-3.6.3.min.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/slick.min.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/smooth-scrollbar.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/app.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+    <!-- Main Wrapper End -->
+</body>
+
+</html>
