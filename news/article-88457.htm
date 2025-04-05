@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://vpnagent.github.io/news/article-88457.htm" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Vue项目中v-bind动态绑定src路径不成功问题及解决_vue.js</title>
+        <meta name="description" content="目录  v-bind动态绑定src路径不成功  解决方案 1 解决方案 2 解决方案 3  vue踩坑--动态v-for图片路径问题  问题所在 解决办法 实现代码     v-bind动态绑定src" />
+        <link rel="icon" href="/assets/website/img/v2ray_free/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="VPN代理 订阅链接节点中文网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vpnagent.github.io/news/article-88457.htm" />
+    <meta property="og:site_name" content="VPN代理 订阅链接节点中文网" />
+    <meta property="og:title" content="Vue项目中v-bind动态绑定src路径不成功问题及解决_vue.js" />
+    <meta property="og:image" content="https://vpnagent.github.io/uploads/20241107/ea1a1a133f5d960052d5b708b1ed3a9e.webp" />
+        <meta property="og:release_date" content="2025-04-04T09:11:16" />
+    <meta property="og:updated_time" content="2025-04-04T09:11:16" />
+        <meta property="og:description" content="目录  v-bind动态绑定src路径不成功  解决方案 1 解决方案 2 解决方案 3  vue踩坑--动态v-for图片路径问题  问题所在 解决办法 实现代码     v-bind动态绑定src" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Vue项目中v-bind动态绑定src路径不成功问题及解决_vue.js">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- All CSS files -->
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/font-awesome.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/slick.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/slick-theme.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/smoothScorllbar.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/app.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SPD2ENWF9H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SPD2ENWF9H');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="tt-smooth-scroll" data-page="detail">
+    <!-- PRELOADER START -->
+    <div id="preloader">
+        <div class="container">
+            <div class="loading">
+                <div class="loading__letter">V</div>
+                <div class="loading__letter">2</div>
+                <div class="loading__letter">R</div>
+                <div class="loading__letter">A</div>
+                <div class="loading__letter">Y&nbsp;</div>
+                <div class="loading__letter">&nbsp;</div>
+                <div class="loading__letter">F</div>
+                <div class="loading__letter">R</div>
+                <div class="loading__letter">E</div>
+                <div class="loading__letter">E</div>
+            </div>
+        </div>
+    </div>
+    <!-- PRELOADER END -->
+    <!-- Main Wrapper Start -->
+    <div id="scroll-container">
+                <!-- HEADER MENU START -->
+        <header class="header">
+            <div class="container-fluid">
+                <nav class="navigation d-flex align-items-center justify-content-between">
+                    <a href="/" class="d-flex align-items-center logo-box">
+                                                <span>VPN代理</span>
+                                            </a>
+                    <div class="menu-button-right">
+                        <div class="main-menu__nav">
+                            <ul class="main-menu__list">
+                                                                <li>
+                                    <a href="/">首页</a>
+                                </li>
+                                                                <li>
+                                    <a href="/free-nodes/">免费节点</a>
+                                </li>
+                                                                <li>
+                                    <a href="/paid-subscribe/">推荐机场</a>
+                                </li>
+                                                                <li>
+                                    <a href="/news/">新闻资讯</a>
+                                </li>
+                                                                <li>
+                                    <a href="/client.htm">客户端</a>
+                                </li>
+                                                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- HEADER MENU END -->
+        <!-- TITLE BANNER START -->
+        <section class="title-banner">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-md-11">
+                        <div class="title-wrapper">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6 col-sm-6">
+                                    <div class="title-content">
+                                        <h1 class="white fw-700">Vue项目中v-bind动态绑定src路径不成功问题及解决_vue.js</h1>
+                                        <small>
+                                            <a href="/">首页</a> / <a href="/news/">新闻资讯</a> / 正文
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-6 d-sm-block d-none">
+                                    <div class="title-image">
+                                        <img src="static/picture/title-banner.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- TITLE BANNER END -->
+                <!-- WHY CHOOSE US -->
+        <section class="why-choose-us py-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                  				  				  				<div id="navCategory"> <h5 class="catalogue">目录</h5> <ul class="first_class_ul"> <li><a href="#_label0" rel="nofollow">v-bind动态绑定src路径不成功</a></li> <ul class="second_class_ul"> <li><a href="#_lab2_0_0" rel="nofollow">解决方案 1</a></li> <li><a href="#_lab2_0_1" rel="nofollow">解决方案 2</a></li> <li><a href="#_lab2_0_2" rel="nofollow">解决方案 3</a></li> </ul> <li><a href="#_label1" rel="nofollow">vue踩坑--动态v-for图片路径问题</a></li> <ul class="second_class_ul"> <li><a href="#_lab2_1_3" rel="nofollow">问题所在</a></li> <li><a href="#_lab2_1_4" rel="nofollow">解决办法</a></li> <li><a href="#_lab2_1_5" rel="nofollow">实现代码</a></li> </ul> </ul> </div> <p class="maodian"><a name="_label0" rel="nofollow"></a></p> <h2>v-bind动态绑定src路径不成功</h2> <p><strong>问题：</strong>在做Vue项目的时候，由于项目需求，需要动态绑定img的src时，突然发现如果说是直接请求后台接口的图片地址就能显示，</p> <p>但是直接动态绑定img的src的图片的相对路径或者是绝对路径的时候，图片不能显示。</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220420/974cf89b2aea49da2c84bd87d4e85d21.jpg"></p> <p class="maodian"><a name="_lab2_0_0" rel="nofollow"></a></p> <h3>解决方案 1</h3> <p>当在给数据MyimgSrc 设置绝对路径或者是相对路径时应该使用require引入才能成功</p> <div class="ay1code"> <pre class="brush:js;">currentSrc : require("@/assets/1.png")</pre> </div> <p class="maodian"><a name="_lab2_0_1" rel="nofollow"></a></p> <h3>解决方案 2</h3> <p>直接导入</p> <div class="ay1code"> <pre class="brush:js;">&lt;img :src="url"/&gt;  import url from '../../assets/logo.png'  data {      url,  }</pre> </div> <p class="maodian"><a name="_lab2_0_2" rel="nofollow"></a></p> <h3>解决方案 3</h3> <p>把图片放到static 文件夹里面 就能直接引入</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220420/008f1afb2a8c0a1d6c274a524288eb96.jpg"></p> <p><strong>总结：</strong>当动态绑定img的src的时候，vue数据绑定图片的相对路径或者是绝对路径的时候，需要require路径。</p> <p class="maodian"><a name="_label1" rel="nofollow"></a></p> <h2>vue踩坑--动态v-for图片路径问题</h2> <p><strong>问题描述：</strong>想要用v-for来动态生成图片路径</p> <div class="ay1code"> <pre class="brush:xhtml;">&lt;div v-for="item in 40"&gt;  	&lt;img :src="'./../../assets/img/' + item + '.jpg'" alt=""&gt;  &lt;/div&gt;  </pre> </div> <p><strong>打包后的路径是这样的</strong></p> <p style="text-align:center"><img decoding="async" alt="在这里插入图片描述" src="http://img.555519.xyz/uploads3/20220420/d7d8e8ec13a0b1c7868d0a2f42909312.jpg"></p> <p><strong>打包后的资源目录是这样的</strong></p> <p style="text-align:center"><img decoding="async" alt="在这里插入图片描述" src="http://img.555519.xyz/uploads3/20220420/71078c0c11206dcd8abb6585c7eec51f.jpg"></p> <p class="maodian"><a name="_lab2_1_3" rel="nofollow"></a></p> <h3>问题所在</h3> <p>上面样写是不行的，你会发现图片在页面中并没有正确显示。从上面的图片可以看出，打包后的图片路径明显不对。     </p> <p>这是因为webpack并没有对我们拼接的路径进行解析，图片也没有被引用到打包后的目录（如果有的话应该是40张）</p> <p>vue-cli文档的HTML和静态资源处理里是这么描述的</p> <p><strong>静态资源可以通过两种方式进行处理：</strong>    </p> <p>在 JavaScript 被导入或在 template/CSS 中通过相对路径被引用。这类引用会被 webpack 处理。</p> <p>放置在 public 目录下或通过绝对路径被引用。这类资源将会直接被拷贝，而不会经过 webpack 的处理。</p> <p><strong>从相对路径导入</strong>    </p> <p>当你在 JavaScript、CSS 或 *.vue 文件中使用相对路径 (必须以 . 开头) 引用一个静态资源时，该资源将会被包含进入 webpack 的依赖图中。在其编译过程中，所有诸如 &lt;img src="…"&gt;、background: url(…) 和 CSS @import 的资源 URL 都会被解析为一个模块依赖。</p> <p>例如，url(./image.png) 会被翻译为 <strong>require(’./image.png’)</strong>，</p> <p>而：&lt;img src="./image.png" alt="Vue项目中v-bind动态绑定src路径不成功问题及解决_vue.js"&gt;将会被编译到：<strong>h(‘img’, { attrs: { src: require(’./image.png’) }})</strong></p> <p>那在上面里我们也是写的相对路径呀，为什么没有被编译呢？     </p> <p>这是因为在编译时图片的url还没有拼接好，{<!-- -->{}}表达式只会在渲染到页面上的时候执行，所以编译的时候src还是’./…/…/assets/img/’ + item + ‘.jpg’，这样的话webpack不认为这是一个模块，所以直接不处理，图片也就没有被编译。</p> <p class="maodian"><a name="_lab2_1_4" rel="nofollow"></a></p> <h3>解决办法</h3> <p>把图片作为资源引入，在图片的url加上require，变成require(url)。</p> <p class="maodian"><a name="_lab2_1_5" rel="nofollow"></a></p> <h3>实现代码</h3> <div class="ay1code"> <pre class="brush:js;">&lt;template&gt;  	&lt;div v-for="item in images"&gt;  		&lt;img :src="item" alt=""&gt;  	&lt;/div&gt;  &lt;/template&gt;  &lt;script&gt;      export default {          name: "",          data: function () {              return {                  changeDirection: true,                  images:[  					require('./../../assets/img/0.jpg'),  					......  					require('./../../assets/img/40.jpg'),  				]              }          }      }  &lt;/script&gt;  </pre> </div> <p>不会吧不会吧，这么多图片不会真有人一个个写吧？多图片应该这样写</p> <div class="ay1code"> <pre class="brush:js;">&lt;script&gt;      export default {          name: "",          data: function () {              return {                  changeDirection: true,                  images:(function () {                      // 导入图片模块                      let fileArr = [];                      for (let i = 0; i &lt; 40; i++) {                          fileArr[i] = require('./../../assets/img/' + i + '.jpg');                      }                      return fileArr;                  })(),              }          }      }  &lt;/script&gt;  </pre> </div> <p><strong>修改后打包后的路径</strong></p> <p style="text-align:center"><img decoding="async" alt="在这里插入图片描述" src="http://img.555519.xyz/uploads3/20220420/ce97a11d13a2bc3f2f75832a2749c65e.jpg"></p> <p><strong>修改后打包后的资源目录</strong></p> <p style="text-align:center"><img decoding="async" alt="在这里插入图片描述" src="http://img.555519.xyz/uploads3/20220420/95af630f9b51321d9cafc89af6f98dcd.jpg"></p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-88456.htm">setup中的props和context</a></p>
+                                        <p>下一个：<a href="/news/article-89189.htm">Windows如何查看WiFi密码</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-79224.htm" title="猫三联一共几针,多少钱成年猫（猫三联一共几针,多少钱成年猫能打）">猫三联一共几针,多少钱成年猫（猫三联一共几针,多少钱成年猫能打）</a></li>
+                        <li class="py-2"><a href="/news/article-76492.htm" title="Redis 主从同步原理解析">Redis 主从同步原理解析</a></li>
+                        <li class="py-2"><a href="/news/article-80592.htm" title="动物注射疫苗的流程图解视频（动物疫苗注射器视频）">动物注射疫苗的流程图解视频（动物疫苗注射器视频）</a></li>
+                        <li class="py-2"><a href="/news/article-81316.htm" title="快乐的用vscode刷LeetCode题目">快乐的用vscode刷LeetCode题目</a></li>
+                        <li class="py-2"><a href="/news/article-69170.htm" title="宠物领养协议有效吗知乎（宠物领养协议是什么）">宠物领养协议有效吗知乎（宠物领养协议是什么）</a></li>
+                        <li class="py-2"><a href="/news/article-86280.htm" title="动物防疫注射栏属于构筑物还是设备（动物防疫注射栏属于构筑物还是设备类别）">动物防疫注射栏属于构筑物还是设备（动物防疫注射栏属于构筑物还是设备类别）</a></li>
+                        <li class="py-2"><a href="/news/article-68511.htm" title="关于宠物犬领养平台app的信息">关于宠物犬领养平台app的信息</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-9-free-node-subscribe.htm" title="VPN代理 | 3月9日21.7M/S|免费VPN/Clash/SSR/Shadowrocket/V2ray免费节点订阅分享">VPN代理 | 3月9日21.7M/S|免费VPN/Clash/SSR/Shadowrocket/V2ray免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-67873.htm" title="去哪领养宠物（一般去哪里领养宠物?）">去哪领养宠物（一般去哪里领养宠物?）</a></li>
+                        <li class="py-2"><a href="/news/article-84116.htm" title="SpringBoot深入浅出系列集成Elasticsearch">SpringBoot深入浅出系列集成Elasticsearch</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">15</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- WHY CHOOSE US -->
+                <!-- FOOTER START -->
+        <footer class="bg-primary pt-sm-40 pt-80 pb-24">
+            <div class="container-fluid">
+                <div class="hr-line mb-24 bg-light-gray"></div>
+                <p class="bottom-bar light-white text-center">
+                                        <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                    <a href="/">VPN代理 订阅链接节点中文网</a> 版权所有 Powered by WordPress
+                </p>
+            </div>
+        </footer>
+        <!-- FOOTER END -->
+        <!-- Back To Top Start -->
+        <button id="back-to-top" style="display: none;"><i class="fa-solid fa-arrow-turn-up"></i></button>
+        <!-- Mobile Menu Start -->
+        <div class="mobile-nav__wrapper">
+            <div class="mobile-nav__overlay mobile-nav__toggler"></div>
+            <div class="mobile-nav__content">
+                <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
+                <div class="logo-box">
+                    <a href="" aria-label="logo image"><img src="/assets/website/img/v2ray_free/logo.png" alt=""></a>
+                </div>
+                <div class="mobile-nav__container"></div>
+                <ul class="mobile-nav__contact list-unstyled">
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:example@company.com">example@company.com</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-phone-alt"></i>
+                        <a href="tel:+12345678">+123 (4567) -890</a>
+                    </li>
+                </ul>
+                <div class="mobile-nav__social">
+                    <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href=""><i class="fab fa-facebook"></i></a>
+                    <a href=""><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu End -->
+        <!-- Jquery Js -->
+        <script src="/assets/website/js/frontend/v2ray_free/bootstrap.min.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/jquery-3.6.3.min.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/slick.min.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/smooth-scrollbar.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/app.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+    <!-- Main Wrapper End -->
+</body>
+
+</html>
