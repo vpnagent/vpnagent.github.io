@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://vpnagent.github.io/news/article-92130.htm" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>vue如何实现关闭对话框后刷新列表_vue.js</title>
+        <meta name="description" content="目录  关闭对话框后刷新列表  父窗口代码 子窗口代码  关闭打开的窗口后刷新父页面  解决办法     关闭对话框后刷新列表 有些场景需要实现用户弹窗确定后自动刷新列表，父窗口绑定fevent即可 " />
+        <link rel="icon" href="/assets/website/img/v2ray_free/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="VPN代理 订阅链接节点中文网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vpnagent.github.io/news/article-92130.htm" />
+    <meta property="og:site_name" content="VPN代理 订阅链接节点中文网" />
+    <meta property="og:title" content="vue如何实现关闭对话框后刷新列表_vue.js" />
+    <meta property="og:image" content="https://vpnagent.github.io/uploads/20241107/1087ff68104024ec6a2f32f0ab5b63d8.webp" />
+        <meta property="og:release_date" content="2025-04-09T09:17:52" />
+    <meta property="og:updated_time" content="2025-04-09T09:17:52" />
+        <meta property="og:description" content="目录  关闭对话框后刷新列表  父窗口代码 子窗口代码  关闭打开的窗口后刷新父页面  解决办法     关闭对话框后刷新列表 有些场景需要实现用户弹窗确定后自动刷新列表，父窗口绑定fevent即可 " />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="vue如何实现关闭对话框后刷新列表_vue.js">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- All CSS files -->
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/font-awesome.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/slick.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/slick-theme.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/smoothScorllbar.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/app.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SPD2ENWF9H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SPD2ENWF9H');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="tt-smooth-scroll" data-page="detail">
+    <!-- PRELOADER START -->
+    <div id="preloader">
+        <div class="container">
+            <div class="loading">
+                <div class="loading__letter">V</div>
+                <div class="loading__letter">2</div>
+                <div class="loading__letter">R</div>
+                <div class="loading__letter">A</div>
+                <div class="loading__letter">Y&nbsp;</div>
+                <div class="loading__letter">&nbsp;</div>
+                <div class="loading__letter">F</div>
+                <div class="loading__letter">R</div>
+                <div class="loading__letter">E</div>
+                <div class="loading__letter">E</div>
+            </div>
+        </div>
+    </div>
+    <!-- PRELOADER END -->
+    <!-- Main Wrapper Start -->
+    <div id="scroll-container">
+                <!-- HEADER MENU START -->
+        <header class="header">
+            <div class="container-fluid">
+                <nav class="navigation d-flex align-items-center justify-content-between">
+                    <a href="/" class="d-flex align-items-center logo-box">
+                                                <span>VPN代理</span>
+                                            </a>
+                    <div class="menu-button-right">
+                        <div class="main-menu__nav">
+                            <ul class="main-menu__list">
+                                                                <li>
+                                    <a href="/">首页</a>
+                                </li>
+                                                                <li>
+                                    <a href="/free-nodes/">免费节点</a>
+                                </li>
+                                                                <li>
+                                    <a href="/paid-subscribe/">推荐机场</a>
+                                </li>
+                                                                <li>
+                                    <a href="/news/">新闻资讯</a>
+                                </li>
+                                                                <li>
+                                    <a href="/client.htm">客户端</a>
+                                </li>
+                                                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- HEADER MENU END -->
+        <!-- TITLE BANNER START -->
+        <section class="title-banner">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-md-11">
+                        <div class="title-wrapper">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6 col-sm-6">
+                                    <div class="title-content">
+                                        <h1 class="white fw-700">vue如何实现关闭对话框后刷新列表_vue.js</h1>
+                                        <small>
+                                            <a href="/">首页</a> / <a href="/news/">新闻资讯</a> / 正文
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-6 d-sm-block d-none">
+                                    <div class="title-image">
+                                        <img src="static/picture/title-banner.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- TITLE BANNER END -->
+                <!-- WHY CHOOSE US -->
+        <section class="why-choose-us py-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                  				  				  				<div id="navCategory"> <h5 class="catalogue">目录</h5> <ul class="first_class_ul"> <li><a href="#_label0" rel="nofollow">关闭对话框后刷新列表</a></li> <ul class="second_class_ul"> <li><a href="#_lab2_0_0" rel="nofollow">父窗口代码</a></li> <li><a href="#_lab2_0_1" rel="nofollow">子窗口代码</a></li> </ul> <li><a href="#_label1" rel="nofollow">关闭打开的窗口后刷新父页面</a></li> <ul class="second_class_ul"> <li><a href="#_lab2_1_2" rel="nofollow">解决办法</a></li> </ul> </ul> </div> <p class="maodian"><a name="_label0" rel="nofollow"></a></p> <h2>关闭对话框后刷新列表</h2> <p>有些场景需要实现用户弹窗确定后自动刷新列表，父窗口绑定fevent即可</p> <p class="maodian"><a name="_lab2_0_0" rel="nofollow"></a></p> <h3>父窗口代码</h3> <div class="ay1code"> <pre class="brush:xhtml;">&lt;template&gt;       &lt;div&gt;   &lt;el-button @click="$refs.editform.dialogFormVisible = true" &gt;编辑用户&lt;/el-button&gt;   &lt;editform  @fevent="update_table" ref="editform"&gt;   &lt;/editform&gt;       &lt;/div&gt;   &lt;/template&gt;</pre> </div> <div class="ay1code"> <pre class="brush:js;">&lt;script&gt;  import editform from './editform.vue'  export default {    components: {      editform    },    methods: {      update_table () {        console.log('列表框被刷新了')      }    }  }  &lt;/script&gt;</pre> </div> <p class="maodian"><a name="_lab2_0_1" rel="nofollow"></a></p> <h3>子窗口代码</h3> <div class="ay1code"> <pre class="brush:xhtml;">&lt;template&gt;         &lt;el-dialog title="编辑用户"  :visible.sync="dialogFormVisible"&gt;             &lt;el-button @click="delete_user"&gt;删除用户&lt;/el-button&gt;      &lt;/el-dialog&gt;  &lt;/template&gt;</pre> </div> <div class="ay1code"> <pre class="brush:js;">&lt;script&gt;  export default {    data () {      return {        dialogFormVisible: false      }    },    methods: {      delete_user () {           this.$emit('fevent')           this.$message.success('删除成功')           this.dialogFormVisible = false      }    }  }  &lt;/script&gt;</pre> </div> <p>附加上自己的业务代码，即可实现列表自动刷新</p> <p class="maodian"><a name="_label1" rel="nofollow"></a></p> <h2>关闭打开的窗口后刷新父页面</h2> <p><strong>背景：</strong>在做页面的过程中需要在页面列表里面添加数据，但是添加之后需要手动刷新页面才会出现添加的数据。</p> <p class="maodian"><a name="_lab2_1_2" rel="nofollow"></a></p> <h3>解决办法</h3> <p>可在添加成功之后添加代码 </p> <div class="ay1code"> <pre class="brush:js;">parent.location.reload();</pre> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-92129.htm">Vue中 Vue.prototype 详解及使用</a></p>
+                                        <p>下一个：<a href="/news/article-92848.htm">新疆宠物店兔子（新疆宠物市场在哪）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-90645.htm" title="宠物猫打疫苗一共多少钱一针（宠物猫打疫苗要多少钱）">宠物猫打疫苗一共多少钱一针（宠物猫打疫苗要多少钱）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-22-free-high-speed-nodes.htm" title="VPN代理 | 3月22日18.1M/S|免费VPN/Shadowrocket/Clash/SSR/V2ray免费节点订阅分享">VPN代理 | 3月22日18.1M/S|免费VPN/Shadowrocket/Clash/SSR/V2ray免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-79224.htm" title="猫三联一共几针,多少钱成年猫（猫三联一共几针,多少钱成年猫能打）">猫三联一共几针,多少钱成年猫（猫三联一共几针,多少钱成年猫能打）</a></li>
+                        <li class="py-2"><a href="/news/article-77854.htm" title="猫咪轻微抓伤破皮（猫咪抓伤轻微破皮要紧吗）">猫咪轻微抓伤破皮（猫咪抓伤轻微破皮要紧吗）</a></li>
+                        <li class="py-2"><a href="/news/article-79225.htm" title="免费领养宠物平台哪个好一点（免费领养宠物套路）">免费领养宠物平台哪个好一点（免费领养宠物套路）</a></li>
+                        <li class="py-2"><a href="/news/article-86998.htm" title="动物打疫苗后的不良反应是什么症状呢（动物打疫苗后的不良反应是什么症状呢图片）">动物打疫苗后的不良反应是什么症状呢（动物打疫苗后的不良反应是什么症状呢图片）</a></li>
+                        <li class="py-2"><a href="/news/article-73116.htm" title="在 vscode 中离线安装扩展的方法">在 vscode 中离线安装扩展的方法</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-5-node-share-links.htm" title="VPN代理 | 3月5日19.9M/S|免费VPN/Clash/V2ray/Shadowrocket/SSR免费节点订阅分享">VPN代理 | 3月5日19.9M/S|免费VPN/Clash/V2ray/Shadowrocket/SSR免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-81316.htm" title="快乐的用vscode刷LeetCode题目">快乐的用vscode刷LeetCode题目</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-3-free-v2ray.htm" title="VPN代理 | 4月3日19.1M/S|免费VPN/V2ray/Shadowrocket/Clash/SSR免费节点订阅分享">VPN代理 | 4月3日19.1M/S|免费VPN/V2ray/Shadowrocket/Clash/SSR免费节点订阅分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- WHY CHOOSE US -->
+                <!-- FOOTER START -->
+        <footer class="bg-primary pt-sm-40 pt-80 pb-24">
+            <div class="container-fluid">
+                <div class="hr-line mb-24 bg-light-gray"></div>
+                <p class="bottom-bar light-white text-center">
+                                        <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                    <a href="/">VPN代理 订阅链接节点中文网</a> 版权所有 Powered by WordPress
+                </p>
+            </div>
+        </footer>
+        <!-- FOOTER END -->
+        <!-- Back To Top Start -->
+        <button id="back-to-top" style="display: none;"><i class="fa-solid fa-arrow-turn-up"></i></button>
+        <!-- Mobile Menu Start -->
+        <div class="mobile-nav__wrapper">
+            <div class="mobile-nav__overlay mobile-nav__toggler"></div>
+            <div class="mobile-nav__content">
+                <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
+                <div class="logo-box">
+                    <a href="" aria-label="logo image"><img src="/assets/website/img/v2ray_free/logo.png" alt=""></a>
+                </div>
+                <div class="mobile-nav__container"></div>
+                <ul class="mobile-nav__contact list-unstyled">
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:example@company.com">example@company.com</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-phone-alt"></i>
+                        <a href="tel:+12345678">+123 (4567) -890</a>
+                    </li>
+                </ul>
+                <div class="mobile-nav__social">
+                    <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href=""><i class="fab fa-facebook"></i></a>
+                    <a href=""><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu End -->
+        <!-- Jquery Js -->
+        <script src="/assets/website/js/frontend/v2ray_free/bootstrap.min.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/jquery-3.6.3.min.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/slick.min.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/smooth-scrollbar.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/app.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+    <!-- Main Wrapper End -->
+</body>
+
+</html>
