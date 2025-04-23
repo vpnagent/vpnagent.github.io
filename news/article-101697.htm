@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://vpnagent.github.io/news/article-101697.htm" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>什么是汇编中的循环详解</title>
+        <meta name="description" content="汇编系列其实也在一直更新，只不过更新的频率会挺慢的。。。由于白天一直忙于工作，空闲时间还要看书、学习各种技术栈，早上也要抽时间早期健身，晚上回家还要陪家人 + 学习，时间安排的满满当当，所以我就慢慢写" />
+        <link rel="icon" href="/assets/website/img/v2ray_free/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="VPN代理 订阅链接节点中文网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vpnagent.github.io/news/article-101697.htm" />
+    <meta property="og:site_name" content="VPN代理 订阅链接节点中文网" />
+    <meta property="og:title" content="什么是汇编中的循环详解" />
+    <meta property="og:image" content="https://vpnagent.github.io/uploads/20241107/3b16f03efef345c7c653d1fc34fc88f8.webp" />
+        <meta property="og:release_date" content="2025-04-22T08:25:27" />
+    <meta property="og:updated_time" content="2025-04-22T08:25:27" />
+        <meta property="og:description" content="汇编系列其实也在一直更新，只不过更新的频率会挺慢的。。。由于白天一直忙于工作，空闲时间还要看书、学习各种技术栈，早上也要抽时间早期健身，晚上回家还要陪家人 + 学习，时间安排的满满当当，所以我就慢慢写" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="什么是汇编中的循环详解">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- All CSS files -->
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/font-awesome.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/slick.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/slick-theme.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/smoothScorllbar.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/app.css">
+    <link rel="stylesheet" href="/assets/website/css/G.css" />
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SPD2ENWF9H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SPD2ENWF9H');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="tt-smooth-scroll" data-page="detail">
+    <!-- PRELOADER START -->
+    <div id="preloader">
+        <div class="container">
+            <div class="loading">
+                <div class="loading__letter">V</div>
+                <div class="loading__letter">2</div>
+                <div class="loading__letter">R</div>
+                <div class="loading__letter">A</div>
+                <div class="loading__letter">Y&nbsp;</div>
+                <div class="loading__letter">&nbsp;</div>
+                <div class="loading__letter">F</div>
+                <div class="loading__letter">R</div>
+                <div class="loading__letter">E</div>
+                <div class="loading__letter">E</div>
+            </div>
+        </div>
+    </div>
+    <!-- PRELOADER END -->
+    <!-- Main Wrapper Start -->
+    <div id="scroll-container">
+                <!-- HEADER MENU START -->
+        <header class="header">
+            <div class="container-fluid">
+                <nav class="navigation d-flex align-items-center justify-content-between">
+                    <a href="/" class="d-flex align-items-center logo-box">
+                                                <span>VPN代理</span>
+                                            </a>
+                    <div class="menu-button-right">
+                        <div class="main-menu__nav">
+                            <ul class="main-menu__list">
+                                                                <li>
+                                    <a href="/">首页</a>
+                                </li>
+                                                                <li>
+                                    <a href="/free-nodes/">免费节点</a>
+                                </li>
+                                                                <li>
+                                    <a href="/paid-subscribe/">推荐机场</a>
+                                </li>
+                                                                <li>
+                                    <a href="/news/">新闻资讯</a>
+                                </li>
+                                                                <li>
+                                    <a href="/client.htm">客户端</a>
+                                </li>
+                                                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- HEADER MENU END -->
+        <!-- TITLE BANNER START -->
+        <section class="title-banner">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-md-11">
+                        <div class="title-wrapper">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6 col-sm-6">
+                                    <div class="title-content">
+                                        <h1 class="white fw-700">什么是汇编中的循环详解</h1>
+                                        <small>
+                                            <a href="/">首页</a> / <a href="/news/">新闻资讯</a> / 正文
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-6 d-sm-block d-none">
+                                    <div class="title-image">
+                                        <img src="static/picture/title-banner.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- TITLE BANNER END -->
+                <!-- WHY CHOOSE US -->
+        <section class="why-choose-us py-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                <div class="xcblog-blog-detail">
+                      				  				  				<p>汇编系列其实也在一直更新，只不过更新的频率会挺慢的。。。由于白天一直忙于工作，空闲时间还要看书、学习各种技术栈，早上也要抽时间早期健身，晚上回家还要陪家人 + 学习，时间安排的满满当当，所以我就慢慢写，各位读者也别太着急，我其实真想再分一个自己出来。</p> <p>之前的文章中介绍过 [0] 表示的是内存单元，它一般存储在 ds 寄存器中，偏移地址为 0 。比如下面的指令</p> <pre><code class="language-assembly">mov ax,[0]</code></pre> <p>就是将一个内存单元的内容送入 ax，这个内存单元的长度为 2 个字节，正好存放一个字型数据，偏移地址为 0 ，段地址在 ds 中。这种寻址方式相当于是直接寻址。</p> <p>比如下面代码</p> <pre><code class="language-assembly">mov al,[0]</code></pre> <p>就是将一个内存单元的地址送入 al 中，这个内存单元的长度是 1 字节，存放字节型数据，偏移地址位 0 ，段地址在 ds 中。</p> <p>所以要描述一个完整的一个内存单元，应该需要两种信息：即<strong>内存单元的地址和内存单元的长度</strong>。</p> <p>比如我们要读取一个 10000H 的数据，你可能会需要下面这段代码。</p> <pre><code class="language-assembly">mov bx,10000H mov ds,bx mov al,[0]</code></pre> <p>上面这三条指令就把 10000H 读取到了 al 中。</p> <p>但是表示内存地址的方式不只有直接指定其内存地址，还可以用一种<strong>间接寻址</strong>的方式，比如 [bx]，它表示的是一种寄存器间接寻址，也是一种偏移地址，同样的，比如我们要读取一个 10000H 的数据，使用 [bx] 这种方式的代码如下（假设 ds = 1000H）</p> <pre><code class="language-assembly">mov bx,1 mov ax,[bx]</code></pre> <p>这样计算机就会寻找段地址为 1000H，偏移地址为 0001H 的数据放入到 ax 中。</p> <p>它的中文解释就是<strong>把 [bx] 指向的地址中的内容，送入 ax 寄存器中</strong>。</p> <p>比如下面这段代码</p> <pre><code class="language-assembly">mov ax,[bx]</code></pre> <p>它表示的就是将偏移地址为 bx 的数据，送入到 ax 中，送入的内存单元地址是 2 个字节，存放字型数据。</p> <p>又比如下面这段代码</p> <pre><code class="language-assembly">mov al,[bx]</code></pre> <p>它表示的就是将偏移地址为 bx 的数据，送入到 al 中，送入的内存单元地址是 1 个字节，存放字节型数据。</p> <p>[bx] 这种间接寻址的好处就是每次偏移地址不是固定的，这为我们接下来的循环指令奠定了基础。</p> <p>为了更方便的描述后面，我们后面使用<code>()</code> 来表示一个寄存器或者内存单元中的内容。</p> <blockquote> <p>这里需要注意一下，() 内的表示的元素一般有三种类型：</p> <ul> <li>寄存器名，比如 (ax) 就表示 ax 中的内容，(al) 就表示 al 中的内容。</li> <li>段寄存器名，比如 (ds) 就表示段寄存器 ds 中的内容。</li> <li>内存单元的物理地址，比如 ((ds) * 16 + (bx))，一个 20 位的数据。</li> </ul> </blockquote> <p>我们知道，寄存器存储的数据类型有两种，字型和字节型，字型数据一般用 ax 这类寄存器来存储，字节型数据一般用 ah 、al 这种寄存器来存储。</p> <p>同样的，() 内的数据类型也有两种，字型和字节型。比如 (al)、(bl)、(cl) 这种表示的数据就是字节型，而 (ax)、(bx)、(cx) 表示的数据就是字型。</p> <p>在了解完上述的这些知识点后，我们就可以来正式看一下 [bx] 了。</p> <h2 id="bx">[BX]</h2> <p>再来啰嗦一下 [bx] 的寻址方式，比如下面代码</p> <pre><code class="language-assembly">mov ax,[bx]</code></pre> <p>bx 中存放的数据作为一个偏移地址，这里用 EA 表示（没有其他意思，只是单纯地表示偏移地址），段地址在 ds 中，用 SA 表示（同 EA 的解释），将 SA:EA 处的数据送入 ax 中，即 (ax) = ((ds) * 16 + (bx))。</p> <p>可以将内存单元送入寄存器中，也可以将寄存器的数据送入到内存单元中，如下代码所示</p> <pre><code class="language-assembly">mov [bx],ax</code></pre> <p>就是将 ax 中的数据送入到 SA：EA 处，即 ((ds) * 16 + (bx)) = (ax)。</p> <p>为了让大家加深对 [bx] 的认识，我们通过一些汇编指令来认识一下程序的执行过程，代码如下</p> <pre><code class="language-assembly">mov ax,2000H mov ds,ax mov bx,1000H mov ax,[bx] inc bx inc bx mov [bx],ax inc bx inc bx mov [bx],ax inc bx mov [bx],al inc bx mov [bx],al</code></pre> <p>下面我们就按照每一行指令来分析一下</p> <p>首先，mov ax,2000H 就是将 2000 送入 ax 中，mov ds,ax 就是将设置段地址为 2000 H，mov bx,1000H 就是将 1000 送入 bx 中，mov ax,[bx] 就是将 2000:1000 处的地址送入到 ax 中（因为段基址为 2000，偏移地址 dx 为 1000），2000H:1000H 处的指令是 00be，所以 ax = 00BEH ，存储字型数据，示意图如下</p> <p><img decoding="async" src="https://tva1.sinaimg.cn/large/008i3skNly1gxgra8aopcj30wy0j8q4b.jpg" alt="什么是汇编中的循环详解"></p> <p>inc bx 就是将寄存器 bx 的值加 1，此处有两条 inc 指令，所以执行完成后 bx = 1002H，此处段基址：偏移地址为 2000H:1002H。</p> <p>然后下面 （第七行指令）mov [bx],ax 就是将 ax 中的数据送入到 [bx] 中，也就是 1002H 处，指令执行后，2000:1002 单元的内容为 BE，2000:1003 单元的内容为 00，存放字型数据，执行完成后的示意图如下</p> <p><img decoding="async" src="https://tva1.sinaimg.cn/large/008i3skNly1gxgr9lhtyrj30wa0iewft.jpg" alt="什么是汇编中的循环详解"></p> <p>继续执行第 8、9 行的指令，inc bx ，执行完成后 bx = 1004H，然后执行第 10 行指令 mov [bx],ax ，指令执行前： ds = 2000H，bx = 1004H，mov [bx],ax 相当于是把 ax 中的数据送到 2000:1004 处，指令执行完成后，2000:1004 的单元内容为 BE，2000:1005 的单元内容为 00 ，如下示意图所示</p> <p><img decoding="async" src="https://tva1.sinaimg.cn/large/008i3skNly1gxgslmvsodj30wc0i6myk.jpg" alt="什么是汇编中的循环详解"></p> <p>接下来执行第 11 行指令，inc bx，执行完成后 bx = 1005H，mov [bx],al 是把 al 中的数据送入内存 2000:1005 处，指令执行完成后，2000:1005 处的单元内容为 BE，如下示意图所示</p> <p><img decoding="async" src="https://tva1.sinaimg.cn/large/008i3skNly1gxgsp5fmfgj30ts0iojss.jpg" alt="什么是汇编中的循环详解"></p> <p>继续执行指令，第13、14 行指令和 11 、12 行指令一样，它的意思就是将 bx 的值加一之后，将 al 的值送入到指定地址处，执行完成后的 ds = 2000H，bx = 1006H，所以 2000:1006 处的内容是 BE（al 存储的数据），示意图如下</p> <p><img decoding="async" src="https://tva1.sinaimg.cn/large/008i3skNly1gxgsski7vpj30ug0j6q4e.jpg" alt="什么是汇编中的循环详解"></p> <p>想必大家跟完上面的流程后，应该对 [bx] 这个间接寻址方式有了比较深刻的认识。</p> <p>下面想个问题，使用汇编编程计算 2 * 2 ，并将结果存储在 ax 寄存器中。</p> <p>这个思路还是比较简单的，直接将 2 放在 ax 寄存器中，然后执行 ax 的 add 操作就可以了，下面是汇编代码</p> <pre><code class="language-assembly">assume cs:codesg codesg segment  mov ax,2  add ax,ax    mov ax,4c00h  int 21h codesg ends end</code></pre> <p>上面这段代码中的计算量还比较低，但是如果要让你计算 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 呢，你难道要写 n 个 add ax,ax 吗？</p> <pre><code class="language-assembly">assume cs:codesg codesg segment  mov ax,2  add ax,ax  add ax,ax  add ax,ax  add ax,ax  。。。    mov ax,4c00h  int 21h codesg ends end</code></pre> <p>这就很繁琐啊，所以不能这么玩，那该怎么搞呢？这里就需要一种能够循环之星 add ax,ax 的指令了，这个指令就是<code>Loop</code>。</p> <h2 id="loop-指令">Loop 指令</h2> <p>Loop 指令能够循环判断是否执行指定的指令，它的执行流程就相当于我们 Java 中的 for 循环。</p> <p>我们先来使用 Loop 改写一下上面 n 个 2 相乘的代码，然后再讲解一下 Loop 的使用。</p> <pre><code class="language-assembly">assume cs:codesg codesg segment 	mov ax,2 	mov cx,8 s: add ax,ax 	loop s  	mov ax,4c00h 	int 21h codesg ends end</code></pre> <p>可以看到，我们使用 8 个 2 相乘的代码被优化的这么简单，这就是 loop 指令的精髓所在。</p> <p>其实关键代码就是三条指令，即</p> <ul> <li>mov cx,8</li> <li>s: add ax,ax</li> <li>loop s</li> </ul> <p>翻译过来的意思就是将 8 放在 cx 中，然后给 add ax,ax 处设置一个标号，然后执行 s 循环。</p> <p>loop 指令的格式是：loop 标号，CPU 执行 loop 指令的时候，要进行两步操作，第一步：(cx) = (cx) - 1，第二步：判断 cx 的值，不为 0 则转至标号（上面代码是 s）处继续执行指令，如果为 0 则向下执行（上面代码中乡下继续执行就是 mov ax,4c00h）。上面代码中，我们把 8 送入了 cx 中，也就是说，cx 中存储的就是执行次数。</p> <p>下面我们详细介绍一下上面这段程序的执行过程，从中体会一下 cx 和 loop s 是如何配合实现循环的。</p> <p>(1) 执行 cx,8 ，设置 cx = 8</p> <p>(2) 执行 add ax,ax（第 1 次）</p> <p>(3) 执行 loop s 将 cx 的值 - 1，此时 (cx) = 7，(cx) != 0 ，所以转至 s 处</p> <p>(4) 执行 add ax,ax（第 2 次）</p> <p>(5) 执行 loop s 将 cx 的值 - 1，此时 (cx) = 6，(cx) != 0 ，所以转至 s 处</p> <p>(6) 执行 add ax,ax（第 3 次）</p> <p>(7) 执行 loop s 将 cx 的值 - 1，此时 (cx) = 5，(cx) != 0 ，所以转至 s 处</p> <p>(8) 执行 add ax,ax（第 4 次）</p> <p>(9) 执行 loop s 将 cx 的值 - 1，此时 (cx) = 4，(cx) != 0 ，所以转至 s 处</p> <p>(10) 执行 add ax,ax（第 5 次）</p> <p>(11) 执行 loop s 将 cx 的值 - 1，此时 (cx) = 3，(cx) != 0 ，所以转至 s 处</p> <p>(12) 执行 add ax,ax（第 6 次）</p> <p>(13) 执行 loop s 将 cx 的值 - 1，此时 (cx) = 2，(cx) != 0 ，所以转至 s 处</p> <p>(14) 执行 add ax,ax（第 7 次）</p> <p>(15) 执行 loop s 将 cx 的值 - 1，此时 (cx) = 1，(cx) != 0 ，所以转至 s 处</p> <p>(16) 执行 add ax,ax（第 8 次）</p> <p>(15) 执行 loop s 将 cx 的值 - 1，此时 (cx) = 0，(cx) == 0 ，所以转至 s 处</p> <p>(16) 执行 mov ax,4c00h（循环结束）</p> <p>从上面这个过程中，我们可以总结处用 cx 和 loop 指令相配合实现循环功能的 3 点注意事项：</p> <ul> <li>在 cx 中存放循环次数。</li> <li>loop 指令中的标号所标识的地址要在前面</li> <li>要循环执行的程序段，要写在标号和 loop 指令的中间。</li> </ul> <p>所以综上所述，使用 Loop 和 cx 相配合实现的循环功能的结构如下：</p> <pre><code class="language-assembly">	mov cx,循环次数 s:  	循环执行的程序段 	loop s</code></pre> <p>比如我们想用 Loop 循环计算出 123 * 456 这个值，就可以使用这种方式</p> <pre><code class="language-assembly">assume cs:codesg codesg segment 	mov ax,0 	mov cx,456 s:add ax,123 	loop s 	 	mov ax,4c00h 	int 21h codesg ends end</code></pre> <p></p> 			                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-100937.htm">上海青浦二中升学率（2020年青浦二中最低录取分）</a></p>
+                                        <p>下一个：<a href="/news/article-101698.htm">狗粮颗粒机器价格多少合适（狗粮颗粒机 配方）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-80591.htm" title="宠物领养协议上可以写禁止弃养嘛为什么不能写 违背宠物领养协议">宠物领养协议上可以写禁止弃养嘛为什么不能写 违背宠物领养协议</a></li>
+                        <li class="py-2"><a href="/news/article-83422.htm" title="上海宠物领养吧百度贴吧论坛（上海宠物狗领养网站）">上海宠物领养吧百度贴吧论坛（上海宠物狗领养网站）</a></li>
+                        <li class="py-2"><a href="/news/article-102501.htm" title="宠物粮代理怎么拿货赚钱 宠物粮代理怎么拿货赚钱的">宠物粮代理怎么拿货赚钱 宠物粮代理怎么拿货赚钱的</a></li>
+                        <li class="py-2"><a href="/news/article-68510.htm" title="领养宠物要花钱吗知乎（领养宠物要花钱吗知乎文章）">领养宠物要花钱吗知乎（领养宠物要花钱吗知乎文章）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-16-free-v2ray.htm" title="VPN代理 | 3月16日20.5M/S|免费VPN/Clash/V2ray/SSR/Shadowrocket免费节点订阅分享">VPN代理 | 3月16日20.5M/S|免费VPN/Clash/V2ray/SSR/Shadowrocket免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-96614.htm" title="2021年公务员考试国考报名时间表格（国考公务员报考日期2022）">2021年公务员考试国考报名时间表格（国考公务员报考日期2022）</a></li>
+                        <li class="py-2"><a href="/news/article-95135.htm" title="北京芭比堂中心院地址（北京的芭比堂宠物医院怎么样）">北京芭比堂中心院地址（北京的芭比堂宠物医院怎么样）</a></li>
+                        <li class="py-2"><a href="/news/article-91352.htm" title="【TypeScript】TypeScript 与 JavaScript 有何不同？">【TypeScript】TypeScript 与 JavaScript 有何不同？</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-22-free-high-speed-nodes.htm" title="VPN代理 | 3月22日18.1M/S|免费VPN/Shadowrocket/Clash/SSR/V2ray免费节点订阅分享">VPN代理 | 3月22日18.1M/S|免费VPN/Shadowrocket/Clash/SSR/V2ray免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-14-free-v2ray.htm" title="VPN代理 | 4月14日19.9M/S|免费VPN/Clash/SSR/Shadowrocket/V2ray免费节点订阅分享">VPN代理 | 4月14日19.9M/S|免费VPN/Clash/SSR/Shadowrocket/V2ray免费节点订阅分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">69</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- WHY CHOOSE US -->
+                <!-- FOOTER START -->
+        <footer class="bg-primary pt-sm-40 pt-80 pb-24">
+            <div class="container-fluid">
+                <div class="hr-line mb-24 bg-light-gray"></div>
+                <p class="bottom-bar light-white text-center">
+                                        <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                    <a href="/">VPN代理 订阅链接节点中文网</a> 版权所有 Powered by WordPress
+                </p>
+            </div>
+        </footer>
+        <!-- FOOTER END -->
+        <!-- Back To Top Start -->
+        <button id="back-to-top" style="display: none;"><i class="fa-solid fa-arrow-turn-up"></i></button>
+        <!-- Mobile Menu Start -->
+        <div class="mobile-nav__wrapper">
+            <div class="mobile-nav__overlay mobile-nav__toggler"></div>
+            <div class="mobile-nav__content">
+                <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
+                <div class="logo-box">
+                    <a href="" aria-label="logo image"><img src="/assets/website/img/v2ray_free/logo.png" alt=""></a>
+                </div>
+                <div class="mobile-nav__container"></div>
+                <ul class="mobile-nav__contact list-unstyled">
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:example@company.com">example@company.com</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-phone-alt"></i>
+                        <a href="tel:+12345678">+123 (4567) -890</a>
+                    </li>
+                </ul>
+                <div class="mobile-nav__social">
+                    <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href=""><i class="fab fa-facebook"></i></a>
+                    <a href=""><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu End -->
+        <!-- Jquery Js -->
+        <script src="/assets/website/js/frontend/v2ray_free/bootstrap.min.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/jquery-3.6.3.min.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/slick.min.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/smooth-scrollbar.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/app.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+    <!-- Main Wrapper End -->
+</body>
+
+</html>
