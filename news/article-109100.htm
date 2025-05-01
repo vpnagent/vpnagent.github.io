@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://vpnagent.github.io/news/article-109100.htm" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Python置换操作浅析(a, b=b, a)【Python】</title>
+        <meta name="description" content="在C/C++中，交换两个数的常规方法有以下两种：  借助临时变量 tmp = a a = b b = tmp   加法操作 a = a + b b = a - b a = a - b    但是在Py" />
+        <link rel="icon" href="/assets/website/img/v2ray_free/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="VPN代理 订阅链接节点中文网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://vpnagent.github.io/news/article-109100.htm" />
+    <meta property="og:site_name" content="VPN代理 订阅链接节点中文网" />
+    <meta property="og:title" content="Python置换操作浅析(a, b=b, a)【Python】" />
+    <meta property="og:image" content="https://vpnagent.github.io/uploads/20241107/3b16f03efef345c7c653d1fc34fc88f8.webp" />
+        <meta property="og:release_date" content="2025-05-01T09:04:13" />
+    <meta property="og:updated_time" content="2025-05-01T09:04:13" />
+        <meta property="og:description" content="在C/C++中，交换两个数的常规方法有以下两种：  借助临时变量 tmp = a a = b b = tmp   加法操作 a = a + b b = a - b a = a - b    但是在Py" />
+        
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Python置换操作浅析(a, b=b, a)【Python】">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- All CSS files -->
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/font-awesome.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/slick.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/slick-theme.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/smoothScorllbar.css">
+    <link rel="stylesheet" href="/assets/website/css/v2ray_free/app.css">
+    <link rel="stylesheet" href="/assets/website/css/G.css" />
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SPD2ENWF9H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SPD2ENWF9H');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body class="tt-smooth-scroll" data-page="detail">
+    <!-- PRELOADER START -->
+    <div id="preloader">
+        <div class="container">
+            <div class="loading">
+                <div class="loading__letter">V</div>
+                <div class="loading__letter">2</div>
+                <div class="loading__letter">R</div>
+                <div class="loading__letter">A</div>
+                <div class="loading__letter">Y&nbsp;</div>
+                <div class="loading__letter">&nbsp;</div>
+                <div class="loading__letter">F</div>
+                <div class="loading__letter">R</div>
+                <div class="loading__letter">E</div>
+                <div class="loading__letter">E</div>
+            </div>
+        </div>
+    </div>
+    <!-- PRELOADER END -->
+    <!-- Main Wrapper Start -->
+    <div id="scroll-container">
+                <!-- HEADER MENU START -->
+        <header class="header">
+            <div class="container-fluid">
+                <nav class="navigation d-flex align-items-center justify-content-between">
+                    <a href="/" class="d-flex align-items-center logo-box">
+                                                <span>VPN代理</span>
+                                            </a>
+                    <div class="menu-button-right">
+                        <div class="main-menu__nav">
+                            <ul class="main-menu__list">
+                                                                <li>
+                                    <a href="/">首页</a>
+                                </li>
+                                                                <li>
+                                    <a href="/free-nodes/">免费节点</a>
+                                </li>
+                                                                <li>
+                                    <a href="/paid-subscribe/">推荐机场</a>
+                                </li>
+                                                                <li>
+                                    <a href="/news/">新闻资讯</a>
+                                </li>
+                                                                <li>
+                                    <a href="/client.htm">客户端</a>
+                                </li>
+                                                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- HEADER MENU END -->
+        <!-- TITLE BANNER START -->
+        <section class="title-banner">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-md-11">
+                        <div class="title-wrapper">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6 col-sm-6">
+                                    <div class="title-content">
+                                        <h1 class="white fw-700">Python置换操作浅析(a, b=b, a)【Python】</h1>
+                                        <small>
+                                            <a href="/">首页</a> / <a href="/news/">新闻资讯</a> / 正文
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-6 d-sm-block d-none">
+                                    <div class="title-image">
+                                        <img src="static/picture/title-banner.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- TITLE BANNER END -->
+                <!-- WHY CHOOSE US -->
+        <section class="why-choose-us py-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="Clash Node官网订阅站" data-url="https://clashnode.github.io">
+                <div class="xcblog-blog-detail xcblog-blog-detail-defined">
+                      				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <p>在C/C++中，交换两个数的常规方法有以下两种：</p> <ol> <li>借助临时变量 <pre><code class="prism language-python">tmp <span class="token operator">=</span> a a <span class="token operator">=</span> b b <span class="token operator">=</span> tmp </code></pre> </li> <li>加法操作 <pre><code class="prism language-python">a <span class="token operator">=</span> a <span class="token operator">+</span> b b <span class="token operator">=</span> a <span class="token operator">-</span> b a <span class="token operator">=</span> a <span class="token operator">-</span> b </code></pre> </li> </ol> <p>但是在Python中，还有一种更简便的方法：</p> <pre><code class="prism language-python">a<span class="token punctuation">,</span> b <span class="token operator">=</span> b<span class="token punctuation">,</span> a <span class="token comment"># 或 b, a = a, b</span> </code></pre> <p>这种方法在一般情况下可以很容易的完成变量交换，甚至在数组中一般情况也是成立的。但是这两天在刷Leetcode时， 题目：缺失的第一个正数，碰到了一个问题，在对数组中的两个值进行交换的时候，即将<code>nums[i]</code>和<code>nums[nums[i]-1]</code>交换时，下面的两个语句，只有第二个语句是正确的：</p> <pre><code class="prism language-python">nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> </code></pre> <p></p> <p><strong>究其原因，明白了置换操作的原理就可以很容易理解。</strong></p> <p>我们通过查看置换前后变量<code>a</code>,<code>b</code>的地址去理解，看下面的例子：</p> <pre><code class="prism language-python">a<span class="token punctuation">,</span>b <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span> <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"-----置换前------"</span><span class="token punctuation">)</span> <span class="token keyword">print</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span> <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"a的地址:"</span><span class="token punctuation">,</span> <span class="token builtin">id</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"b的地址:"</span><span class="token punctuation">,</span> <span class="token builtin">id</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span> a<span class="token punctuation">,</span>b <span class="token operator">=</span> b<span class="token punctuation">,</span>a <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"-----置换后------"</span><span class="token punctuation">)</span> <span class="token keyword">print</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span> <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"a的地址:"</span><span class="token punctuation">,</span> <span class="token builtin">id</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"b的地址:"</span><span class="token punctuation">,</span> <span class="token builtin">id</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">)</span> </code></pre> <p>输出结果是</p> <pre><code class="prism language-python"><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span>置换前<span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span> <span class="token number">1</span> <span class="token number">2</span> a的地址<span class="token punctuation">:</span> <span class="token number">4444362368</span> b的地址<span class="token punctuation">:</span> <span class="token number">4444362400</span> <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span>置换后<span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span> <span class="token number">2</span> <span class="token number">1</span> a的地址<span class="token punctuation">:</span> <span class="token number">4444362400</span> b的地址<span class="token punctuation">:</span> <span class="token number">4444362368</span> </code></pre> <p>可以看到，python中对变量的赋值是改变变量的指向，将变量指向目标值的地址。</p> <p>所以，对于置换操作<code>a, b = b, a</code>，操作顺序是先计算得到等号右边的所有数值，再将值<strong>依次</strong>赋给等号的左边。</p> <p>再回到上面出问题的例子<br /> 错误的：</p> <pre><code class="prism language-python">nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> </code></pre> <p>正确的：</p> <pre><code class="prism language-python">nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> </code></pre> <p>问题就出在计算得到等式右边后，将值「依次」赋给等号的左边。可以看到<code>nums[nums[i] - 1]</code>引用了<code>nums[i]</code>。具体来说，对于错误的，由于<code>nums[nums[i] - 1]</code>引用了<code>nums[i]</code>，而这时的<code>nums[i]</code>已经重新赋值完毕，所以不正确。</p> <p> 总结一下，对于置换操作<code>a, b = b, a</code>，原理是计算得到等式右边后，将值「依次」赋给等号的左边。然后如果<code>a</code>和<code>b</code>存在引用关系，特别是在数组中，特别注意后者不能引用前者。</p> </p></div> 			                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-108289.htm">人打兽用疫苗会怎样呢（人打兽用疫苗会怎样呢视频）</a></p>
+                                        <p>下一个：<a href="/news/article-109103.htm">女人学纹绣有出路吗（学纹绣有年龄限制吗）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-104014.htm" title="建议穷人养的10种猫价格（宠物猫穷养）">建议穷人养的10种猫价格（宠物猫穷养）</a></li>
+                        <li class="py-2"><a href="/news/article-98749.htm" title="美团宠物医院好评50字通用评论（宠物医院好评语句）">美团宠物医院好评50字通用评论（宠物医院好评语句）</a></li>
+                        <li class="py-2"><a href="/news/article-88457.htm" title="Vue项目中v-bind动态绑定src路径不成功问题及解决_vue.js">Vue项目中v-bind动态绑定src路径不成功问题及解决_vue.js</a></li>
+                        <li class="py-2"><a href="/news/article-107463.htm" title="动物医院好评语大全简短 动物医院好评语大全简短一点">动物医院好评语大全简短 动物医院好评语大全简短一点</a></li>
+                        <li class="py-2"><a href="/news/article-92848.htm" title="新疆宠物店兔子（新疆宠物市场在哪）">新疆宠物店兔子（新疆宠物市场在哪）</a></li>
+                        <li class="py-2"><a href="/news/article-86280.htm" title="动物防疫注射栏属于构筑物还是设备（动物防疫注射栏属于构筑物还是设备类别）">动物防疫注射栏属于构筑物还是设备（动物防疫注射栏属于构筑物还是设备类别）</a></li>
+                        <li class="py-2"><a href="/news/article-90644.htm" title="关于动物医院的纪录片（动物医生纪录片）">关于动物医院的纪录片（动物医生纪录片）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-9-free-v2ray.htm" title="VPN代理 | 4月9日19.7M/S|免费VPN/SSR/Shadowrocket/V2ray/Clash免费节点订阅分享">VPN代理 | 4月9日19.7M/S|免费VPN/SSR/Shadowrocket/V2ray/Clash免费节点订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-100937.htm" title="上海青浦二中升学率（2020年青浦二中最低录取分）">上海青浦二中升学率（2020年青浦二中最低录取分）</a></li>
+                        <li class="py-2"><a href="/news/article-96614.htm" title="2021年公务员考试国考报名时间表格（国考公务员报考日期2022）">2021年公务员考试国考报名时间表格（国考公务员报考日期2022）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">3</span> <a href="/date/2025-05/" title="2025-05 归档">2025-05</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- WHY CHOOSE US -->
+                <!-- FOOTER START -->
+        <footer class="bg-primary pt-sm-40 pt-80 pb-24">
+            <div class="container-fluid">
+                <div class="hr-line mb-24 bg-light-gray"></div>
+                <p class="bottom-bar light-white text-center">
+                                        <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                    <a href="/">VPN代理 订阅链接节点中文网</a> 版权所有 Powered by WordPress
+                </p>
+            </div>
+        </footer>
+        <!-- FOOTER END -->
+        <!-- Back To Top Start -->
+        <button id="back-to-top" style="display: none;"><i class="fa-solid fa-arrow-turn-up"></i></button>
+        <!-- Mobile Menu Start -->
+        <div class="mobile-nav__wrapper">
+            <div class="mobile-nav__overlay mobile-nav__toggler"></div>
+            <div class="mobile-nav__content">
+                <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
+                <div class="logo-box">
+                    <a href="" aria-label="logo image"><img src="/assets/website/img/v2ray_free/logo.png" alt=""></a>
+                </div>
+                <div class="mobile-nav__container"></div>
+                <ul class="mobile-nav__contact list-unstyled">
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:example@company.com">example@company.com</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-phone-alt"></i>
+                        <a href="tel:+12345678">+123 (4567) -890</a>
+                    </li>
+                </ul>
+                <div class="mobile-nav__social">
+                    <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href=""><i class="fab fa-facebook"></i></a>
+                    <a href=""><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu End -->
+        <!-- Jquery Js -->
+        <script src="/assets/website/js/frontend/v2ray_free/bootstrap.min.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/jquery-3.6.3.min.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/slick.min.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/smooth-scrollbar.js"></script>
+        <script src="/assets/website/js/frontend/v2ray_free/app.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+    <!-- Main Wrapper End -->
+</body>
+
+</html>
